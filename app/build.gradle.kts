@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.xinhui.mobfinalproject"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.xinhui.mobfinalproject"
         minSdk = 28
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
