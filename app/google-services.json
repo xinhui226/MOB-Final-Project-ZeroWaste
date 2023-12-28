@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "873462804279",
+    "project_id": "zerowastemobproject",
+    "storage_bucket": "zerowastemobproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873462804279:android:41579cfb3eccedc196b4b2",
+        "android_client_info": {
+          "package_name": "com.xinhui.mobfinalproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQj82Nqx3NWOshqS_OZYt0uXZNc8MR1Ys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
