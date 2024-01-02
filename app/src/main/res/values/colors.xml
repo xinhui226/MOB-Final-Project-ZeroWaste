@@ -2,4 +2,17 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    Light Mode-->
+    <color name="LM_bg_color">#F9F7F7</color>
+    <color name="LM_gray">#DBE2EF</color>
+    <color name="LM_blue">#3F72AF</color>
+    <color name="LM_dk_blue">#112D4E</color>
+
+<!--    Dark Mode-->
+    <color name="DM_bg_color">#1B262C</color>
+    <color name="DM_dk_blue">#0F4C75</color>
+    <color name="DM_blue">#3282B8</color>
+    <color name="DM_light_blue">#BBE1FA</color>
+
 </resources>
