@@ -12,7 +12,7 @@ data class User(
             "name" to name,
             "email" to email,
             "profileUrl" to profileUrl.toString(),
-            "role" to role
+            "role" to role.role
         )
     }
 
@@ -23,7 +23,7 @@ data class User(
                 name = hash["name"].toString(),
                 email = hash["email"].toString(),
                 profileUrl = hash["profileUrl"].toString(),
-                role = Role.PERS
+                role = if(hash["role"] == "NGO") Role.NGO else if (hash["role"] == "BUSINESS") Role.BIZ else Role.PERS
             )
         }
     }
