@@ -1,7 +1,7 @@
 package com.xinhui.mobfinalproject.data.model
 
 data class Product(
-    var id: Int?,
+    var id: String? = "",
     var quantity: Int,
     var productName: String,
     var unit: String,
@@ -21,7 +21,7 @@ data class Product(
     companion object {
         fun fromMap(hash: Map<String, Any?>): Product {
             return Product(
-                id = hash["id"].toString().toInt(),
+                id = hash["id"].toString(),
                 quantity = hash["quantity"].toString().toInt(),
                 productName = hash["productName"].toString(),
                 unit = hash["unit"].toString(),
