@@ -1,5 +1,6 @@
 package com.xinhui.mobfinalproject.core.service
 
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseUser
 
 interface AuthService {
@@ -13,4 +14,5 @@ interface AuthService {
         newPassword:String,
         onFinish: (msg: String, err: String?) -> Unit
     )
+    suspend fun signInWithGoogle(credential: AuthCredential): FirebaseUser?
 }

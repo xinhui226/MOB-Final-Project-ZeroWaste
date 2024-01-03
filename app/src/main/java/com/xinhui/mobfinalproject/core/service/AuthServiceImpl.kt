@@ -1,5 +1,6 @@
 package com.xinhui.mobfinalproject.core.service
 
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -54,5 +55,8 @@ class AuthServiceImpl(
         }
     }
 
-
+    override suspend fun signInWithGoogle(credential: AuthCredential): FirebaseUser? {
+        val result = auth.signInWithCredential(credential).await()
+        return result.user
+    }
 }

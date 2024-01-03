@@ -12,7 +12,20 @@
           "package_name": "com.xinhui.mobfinalproject"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "873462804279-j4vkjou9sbin0148uob2b40bqirpcots.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xinhui.mobfinalproject",
+            "certificate_hash": "6d505390fc6ccea7afb5b3cbaa71ea18286c253e"
+          }
+        },
+        {
+          "client_id": "873462804279-atf46v4ih9n7vib1kg5a5feg5006qlfe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAQj82Nqx3NWOshqS_OZYt0uXZNc8MR1Ys"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873462804279-atf46v4ih9n7vib1kg5a5feg5006qlfe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
