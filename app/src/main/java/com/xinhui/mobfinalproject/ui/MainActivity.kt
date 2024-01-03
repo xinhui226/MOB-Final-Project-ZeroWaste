@@ -1,7 +1,8 @@
-package com.xinhui.mobfinalproject
+package com.xinhui.mobfinalproject.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.xinhui.mobfinalproject.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
