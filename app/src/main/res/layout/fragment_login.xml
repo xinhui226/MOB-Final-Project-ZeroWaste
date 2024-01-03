@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cvImage">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -40,11 +41,11 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
         <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:src="@drawable/crop"
             tools:layout_editor_absoluteX="130dp"
             tools:layout_editor_absoluteY="173dp" />
@@ -77,6 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         app:layout_constraintBottom_toTopOf="@+id/tvForgetPass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -97,18 +99,19 @@
         android:text="@string/forget_password"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.916"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.919"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
-        android:layout_marginBottom="8dp"
         android:backgroundTint="@color/LM_blue"
         android:text="@string/login"
         app:cornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/guideline3"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -120,6 +123,7 @@
         android:layout_marginBottom="44dp"
         android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -145,6 +149,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:paddingHorizontal="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintBottom_toTopOf="@+id/materialButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -176,7 +181,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/guideline2"
         app:layout_constraintVertical_bias="0.768" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -198,6 +203,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.75239396" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

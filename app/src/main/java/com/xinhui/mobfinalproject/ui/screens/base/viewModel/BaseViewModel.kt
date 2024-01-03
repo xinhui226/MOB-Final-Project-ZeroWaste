@@ -1,10 +1,11 @@
 package com.xinhui.mobfinalproject.ui.screens.base.viewModel
 
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import javax.security.auth.callback.Callback
 
-abstract class BaseViewModel {
+abstract class BaseViewModel: ViewModel() {
     protected val _error = MutableSharedFlow<String>()
     val error: SharedFlow<String> = _error
 
