@@ -3,7 +3,6 @@ package com.xinhui.mobfinalproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -30,8 +29,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        Log.d("debugging", "onCreate:${authService.getCurrUser()?.uid}")
 
         findViewById<MaterialButton>(R.id.mbGoogle).setOnClickListener {
             signIn()
@@ -71,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             authService.signInWithGoogle(credential)?.let {
                 setupGoogleClient(this@MainActivity)
-                Log.d("debugging", "firebaseAuthWithGoogle: ${it.uid}")
             }
         }
     }
@@ -88,9 +84,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun signOut() {
-        Log.d("debugging", "onDestroy: somehting")
-        mGoogleSignInClient.signOut()
-        authService.logout()
-        Log.d("debugging", "signOut: ${authService.getCurrUser()}")
+        if (!authService.getCurrUser()?.uid.isNullOrEmpty()) {
+            mGoogleSignInClient.signOut()
+            authService.logout()
+        }
     }
 }
