@@ -11,4 +11,9 @@
     <string name="name">Name</string>
     <string name="have_an_account">Have an account?</string>
     <string name="login_now"><u>Login Now</u></string>
+    <string name="or">Or</string>
+    <string name="get_started">Get Started</string>
+    <string name="skip">SKIP</string>
+    <string name="did_you_know"><u>Did you know?</u></string>
+    <string name="next">Next</string>
 </resources>
