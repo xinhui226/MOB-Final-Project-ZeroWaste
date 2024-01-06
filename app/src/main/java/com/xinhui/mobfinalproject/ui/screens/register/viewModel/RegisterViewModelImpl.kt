@@ -36,7 +36,7 @@ class RegisterViewModelImpl @Inject constructor(
     private fun registrationValidate(name: String, email: String, pass: String, confirmPass: String): String? {
         return if (name.isEmpty() || email.isEmpty() || pass.isEmpty() || confirmPass.isEmpty())
             "Please fill in all fields"
-         else if (Patterns.EMAIL_ADDRESS.matcher(email).matches())
+         else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
              "Invalid email address format"
          else if (pass.length < 6)
              "Password must be at least 6 characters"
