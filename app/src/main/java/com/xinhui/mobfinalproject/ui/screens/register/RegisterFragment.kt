@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.xinhui.mobfinalproject.databinding.FragmentRegisterBinding
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.register.viewModel.RegisterViewModelImpl
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -47,7 +47,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
-            viewModel.user.collect{ user -> }
+            viewModel.success.collect{
+                val action = RegisterFragmentDirections.toHome()
+                navController.navigate(action)
+            }
         }
     }
 }

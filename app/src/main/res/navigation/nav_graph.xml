@@ -12,6 +12,12 @@
         app:popUpToInclusive="true" />
 
     <action
+        android:id="@+id/toHome"
+        app:destination="@+id/tabContainerFragment"
+        app:popUpTo="@id/tabContainerFragment"
+        app:popUpToInclusive="true" />
+
+    <action
         android:id="@+id/toLandingPage"
         app:destination="@+id/landingPageFragment"/>
 
