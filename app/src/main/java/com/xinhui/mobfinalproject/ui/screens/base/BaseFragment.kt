@@ -46,7 +46,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         }
     }
 
-    fun showSnackbar(msg: String, error: Boolean = false){
+    private fun showSnackbar(msg: String, error: Boolean = false){
         val snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG)
         if(error){
             snackbar.setBackgroundTint(
@@ -56,5 +56,6 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
                 )
             )
         }
+        snackbar.show()
     }
 }

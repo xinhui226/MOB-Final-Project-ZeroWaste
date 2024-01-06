@@ -33,7 +33,10 @@ class UserRepoImpl(
     }
 
     override suspend fun updateUserDetail(user: User) {
-        getDbRef().document().set(user.id.toString()).await()
+        user.id.let {
+            if (it.isNullOrEmpty()) throw Exception("User id not found")
+            else getDbRef().document(it).set(user).await()
+        }
     }
 
     override suspend fun deleteUser(id: String) {

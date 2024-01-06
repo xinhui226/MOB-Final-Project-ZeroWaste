@@ -5,14 +5,12 @@ data class User(
     val name:String,
     val email:String,
     val profileUrl:String? = null,
-    val role:Role = Role.PERS
 ){
     fun toHash():HashMap<String,Any>{
         return hashMapOf(
             "name" to name,
             "email" to email,
             "profileUrl" to profileUrl.toString(),
-            "role" to role.role
         )
     }
 
@@ -23,14 +21,7 @@ data class User(
                 name = hash["name"].toString(),
                 email = hash["email"].toString(),
                 profileUrl = hash["profileUrl"].toString(),
-                role = if(hash["role"] == "NGO") Role.NGO else if (hash["role"] == "BUSINESS") Role.BIZ else Role.PERS
             )
         }
     }
-}
-
-enum class Role(val role:String){
-    NGO("NGO"),
-    PERS("PERSONAL"),
-    BIZ("BUSINESS"),
 }
