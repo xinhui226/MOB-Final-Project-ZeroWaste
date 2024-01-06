@@ -40,13 +40,13 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         }
 
         lifecycleScope.launch {
-            viewModel.error.collect {
+            viewModel.success.collect {
                showSnackbar(it)
             }
         }
     }
 
-    fun showSnackbar(msg: String, error: Boolean = false){
+    private fun showSnackbar(msg: String, error: Boolean = false){
         val snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG)
         if(error){
             snackbar.setBackgroundTint(
@@ -56,5 +56,6 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
                 )
             )
         }
+        snackbar.show()
     }
 }

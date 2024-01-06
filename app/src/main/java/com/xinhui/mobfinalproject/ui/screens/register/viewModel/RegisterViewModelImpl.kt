@@ -1,5 +1,6 @@
 package com.xinhui.mobfinalproject.ui.screens.register.viewModel
 
+import android.util.Patterns
 import androidx.lifecycle.viewModelScope
 import com.xinhui.mobfinalproject.core.service.AuthService
 import com.xinhui.mobfinalproject.data.model.User
@@ -7,8 +8,6 @@ import com.xinhui.mobfinalproject.data.repo.user.UserRepo
 import com.xinhui.mobfinalproject.ui.screens.base.viewModel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,30 +17,33 @@ class RegisterViewModelImpl @Inject constructor(
     private val userRepo: UserRepo
 ) : BaseViewModel(), RegisterViewModel {
 
-    private val _user = MutableStateFlow(User(name = "Name", email = "Email"))
-    val user: StateFlow<User> = _user
-
     override fun register(name: String, email: String, pass: String, confirmPass: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val user = errorHandler {
-                authService.signUp(email, pass)
+            registrationValidate(name, email, pass, confirmPass).let {
+                if (it.isNullOrEmpty()) {
+                    val user = errorHandler {
+                        authService.signUp(email, pass)
+                    }
+                    if(user != null) {
+                        _success.emit("Register Successfully")
+                        errorHandler { userRepo.addNewUser(User(name = name, email = email)) }
+                    }
+                } else _error.emit(it)
             }
-
-            if(user != null) {
-                _success.emit("Register Successfully")
-                errorHandler {
-                    userRepo.addNewUser(
-                        User(
-                            name = name,
-                            email = email
-                        )
-                    )
-                }
-            }
-
         }
+    }
 
-
+    private fun registrationValidate(name: String, email: String, pass: String, confirmPass: String): String? {
+        return if (name.isEmpty() || email.isEmpty() || pass.isEmpty() || confirmPass.isEmpty())
+            "Please fill in all fields"
+         else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+             "Invalid email address format"
+         else if (pass.length < 6)
+             "Password must be at least 6 characters"
+        else if (pass != confirmPass)
+            "Password and Confirm Password is not the same"
+        else
+            null
     }
 
 }
