@@ -6,7 +6,9 @@ data class Product(
     var productName: String,
     var unit: String,
     var storagePlace: String,
-    var category: String
+    var expiryDate: String,
+    var category: List<Category> = emptyList(),
+    var createdBy: String
 ) {
     fun toHash(): Map<String, Any?> {
         return hashMapOf(
@@ -14,7 +16,9 @@ data class Product(
             "productName" to productName,
             "unit" to unit,
             "storagePlace" to storagePlace,
+            "expiryDate" to expiryDate,
             "category" to category,
+            "createdBy" to createdBy
         )
     }
 
@@ -26,8 +30,29 @@ data class Product(
                 productName = hash["productName"].toString(),
                 unit = hash["unit"].toString(),
                 storagePlace = hash["storagePlace"].toString(),
-                category = hash["category"].toString(),
+                expiryDate = hash["expiryDate"].toString(),
+                category = (hash["category"] as ArrayList<*>).map {
+                    when(it){
+                        "Diary" -> Category.diary
+                        "Fruits" -> Category.fruits
+                        "Cereals & Grains" -> Category.cerealsgrains
+                        "Meat" -> Category.meat
+                        "Confections" -> Category.confections
+                        "Vegetables" -> Category.vegetables
+                        else -> Category.drinks
+                } }.toList(),
+                createdBy = hash["createdBy"].toString()
             )
         }
     }
+}
+
+enum class Category(var categoryName:String) {
+    diary("Diary"),
+    fruits("Fruits"),
+    cerealsgrains("Cereals & Grains"),
+    meat("Meat"),
+    confections("Confections"),
+    vegetables("Vegetables"),
+    drinks("Beverages")
 }
