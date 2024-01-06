@@ -78,4 +78,5 @@ dependencies {
 
     //For SVG Images
     implementation("com.caverock:androidsvg:1.4")
+
 }

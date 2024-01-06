@@ -27,14 +27,14 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:layout_constraintVertical_bias="2">
+        app:layout_constraintVertical_bias="2"
+        app:layout_constraintTop_toTopOf="@+id/guideline3">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/food" />
+            android:src="@drawable/fridge" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="Every year, the world throws away so much food that it could fill multiple football stadiums. This happens at every stage of the food journey, from farms to homes. Tackling this problem not only fights hunger but also eases the pressure on our planet's resources."
+                android:text="Your fridge might be causing food waste. People often throw away a lot of food just because they forget it's in the back of the fridge. If we pay more attention to how we store food and organize our fridges better, we can avoid wasting good food that gets overlooked."
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -66,13 +66,13 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGet"
+        android:id="@+id/btnNext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
         android:layout_marginBottom="28dp"
         android:backgroundTint="@color/LM_blue"
-        android:text="@string/get_started"
+        android:text="@string/next"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
