@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.xinhui.mobfinalproject.R
 import dagger.hilt.android.AndroidEntryPoint
+import com.xinhui.mobfinalproject.R
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
