@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">MOBFinalProject</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register_now"><u>Register Now</u></string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="name">Name</string>
+    <string name="have_an_account">Have an account?</string>
+    <string name="login_now"><u>Login Now</u></string>
+    <string name="or">Or</string>
+    <string name="get_started">Get Started</string>
+    <string name="skip">SKIP</string>
+    <string name="did_you_know"><u>Did you know?</u></string>
+    <string name="next">Next</string>
 </resources>

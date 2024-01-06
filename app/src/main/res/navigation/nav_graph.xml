@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/landingPageFragment">
+
+    <action
+        android:id="@+id/toLogin"
+        app:destination="@+id/loginFragment"
+        app:popUpTo="@id/loginFragment"
+        app:popUpToInclusive="true"
+        />
+
+    <action
+        android:id="@+id/toLandingPage"
+        app:destination="@+id/landingPageFragment"
+
+        />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"
+        >
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.register.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register"
+        />
+    <fragment
+        android:id="@+id/landingPageFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.landingPageFragment"
+        android:label="landingPageFragment"
+        tools:layout="@layout/landing_page"
+        >
+        <action
+            android:id="@+id/action_landingPage_to_landingPage2"
+            app:destination="@id/landingPage2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/landingPage2Fragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.landingPage2Fragment"
+        android:label="landingPage2Fragment"
+        tools:layout="@layout/landing_page2"
+        >
+        <action
+            android:id="@+id/action_landingPage2_to_landingPage3"
+            app:destination="@id/landingPage3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/landingPage3Fragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.landingPage3Fragment"
+        android:label="landingPage3Fragment"
+        tools:layout="@layout/landing_page3"
+        />
+</navigation>
