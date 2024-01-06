@@ -1,0 +1,10 @@
+package com.xinhui.mobfinalproject.ui.screens.home.viewModel
+
+import com.xinhui.mobfinalproject.data.model.Product
+import kotlinx.coroutines.flow.StateFlow
+
+interface HomeViewModel {
+    val products: StateFlow<List<Product>>
+
+    fun getProducts(category: String?)
+}

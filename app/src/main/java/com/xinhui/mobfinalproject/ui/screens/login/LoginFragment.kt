@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.databinding.FragmentLoginBinding
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.login.viewModel.LoginViewModelImpl
@@ -52,8 +53,7 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(){
 
         lifecycleScope.launch {
             viewModel.success.collect{
-                val action = LoginFragmentDirections.toHome()
-                navController.navigate(action)
+                navController.navigate(R.id.toHome)
             }
         }
     }
