@@ -40,7 +40,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         }
 
         lifecycleScope.launch {
-            viewModel.error.collect {
+            viewModel.success.collect {
                showSnackbar(it)
             }
         }
