@@ -4,6 +4,7 @@ import com.xinhui.mobfinalproject.data.model.User
 
 interface UserRepo {
     suspend fun getUser(): User?
+    suspend fun getUserByEmail(email: String): User?
     suspend fun addNewUser(user: User)
     suspend fun updateUserDetail(user: User)
     suspend fun deleteUser(id:String)

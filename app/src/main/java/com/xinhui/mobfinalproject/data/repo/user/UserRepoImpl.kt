@@ -1,5 +1,6 @@
 package com.xinhui.mobfinalproject.data.repo.user
 
+import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.xinhui.mobfinalproject.core.service.AuthService
@@ -26,6 +27,18 @@ class UserRepoImpl(
             it["id"] = snapshot.id
             User.fromHashMap(it)
         }
+    }
+
+    override suspend fun getUserByEmail(email: String): User? {
+        getDbRef()
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d("debugging:user", "${document.id} => ${document.data}")
+                }
+            }
+        return null
     }
 
     override suspend fun addNewUser(user: User) {

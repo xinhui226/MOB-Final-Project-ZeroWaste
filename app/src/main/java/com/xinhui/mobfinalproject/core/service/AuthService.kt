@@ -14,7 +14,7 @@ interface AuthService {
 
     fun getUid():String
 
-    fun resetPassword(
+    suspend fun resetPassword(
         email:String,
         onFinish: (msg: String, err: String?) -> Unit
     )
