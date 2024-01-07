@@ -13,6 +13,9 @@ class  LoginViewModelImpl @Inject constructor(
     private val authService: AuthService,
 ): BaseViewModel(), LoginViewModel  {
 
+    private val _loggedIn = MutableSharedFlow<Unit>()
+    override val loggedIn: SharedFlow<Unit> = _loggedIn
+
     override fun login(email: String, pass: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val res = errorHandler {
@@ -21,6 +24,7 @@ class  LoginViewModelImpl @Inject constructor(
 
             if(res !=  null) {
                 _success.emit("Login Successfully")
+                _loggedIn.emit(Unit)
             } else {
                 _error.emit("Invalid credential")
             }
