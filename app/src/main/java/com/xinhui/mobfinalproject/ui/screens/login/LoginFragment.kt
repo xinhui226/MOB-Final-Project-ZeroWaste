@@ -52,7 +52,7 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(){
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
-            viewModel.success.collect{
+            viewModel.loggedIn.collect{
                 navController.navigate(R.id.toHome)
             }
         }
