@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
             // TODO: make changes for all the categories
             btnAll.setOnClickListener {
-                viewModel.getProducts(null)
+                viewModel.getProducts()
             }
             btnFruits.setOnClickListener {
                 viewModel.getProducts(Category.fruits.categoryName)

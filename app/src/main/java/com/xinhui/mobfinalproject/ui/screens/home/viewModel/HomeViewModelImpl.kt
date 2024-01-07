@@ -20,21 +20,24 @@ class HomeViewModelImpl @Inject constructor(
     override val products: StateFlow<List<Product>> = _products
 
     init {
-        getProducts(null)
+        getProducts()
     }
 
-    override fun getProducts(category: String?) {
+    override fun getProducts() {
         viewModelScope.launch(Dispatchers.IO) {
-            if (category != null) {
-                errorHandler { productRepo.getProductsByCategory(category).collect{
+            errorHandler {
+                productRepo.getAllProducts().collect {
                     _products.emit(it)
                 } }
-            } else {
-                errorHandler {
-                    productRepo.getAllProducts().collect {
-                        _products.emit(it)
-                    } }
-            }
+        }
+    }
+
+    override fun getProducts(category: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            errorHandler {
+                productRepo.getProductsByCategory(category).collect {
+                    _products.emit(it)
+                } }
         }
     }
 }

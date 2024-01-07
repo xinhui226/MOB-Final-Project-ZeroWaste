@@ -6,5 +6,6 @@ import kotlinx.coroutines.flow.StateFlow
 interface HomeViewModel {
     val products: StateFlow<List<Product>>
 
-    fun getProducts(category: String?)
+    fun getProducts()
+    fun getProducts(category: String)
 }
