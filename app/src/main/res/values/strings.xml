@@ -22,4 +22,8 @@
     <string name="chicken">Chicken</string>
     <string name="freezer">Freezer</string>
     <string name="expiring_in_2_days">Expiring in 2 days</string>
+    <string name="enter_email">Enter email</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="reset_password">Reset password</string>
 </resources>

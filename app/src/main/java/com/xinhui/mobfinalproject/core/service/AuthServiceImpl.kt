@@ -1,6 +1,5 @@
 package com.xinhui.mobfinalproject.core.service
 
-import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.tasks.await
@@ -30,29 +29,10 @@ class AuthServiceImpl(
         return auth.currentUser?.uid ?: throw Exception("No authentic user found")
     }
 
-    override fun updatePassword(
-        existPassword: String,
-        newPassword: String,
-        onFinish: (msg: String, err: String?) -> Unit
-    ) {
-        val user = auth.currentUser
-        if(user?.email != null) {
-            user.reauthenticate(
-                EmailAuthProvider
-                    .getCredential(user.email!!, existPassword)
-            ).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    user.updatePassword(newPassword)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) onFinish("Successfully updated password.", null)
-                            else onFinish("", "Something wrong")
-                        }
-                } else onFinish("", "Invalid credential")
-            }
-        } else {
-            onFinish("", "No authentic user found")
+    override fun resetPassword(email: String, onFinish: (msg: String, err: String?) -> Unit) {
+        auth.sendPasswordResetEmail(email).addOnCompleteListener {
+            if (it.isSuccessful) onFinish("Successfully send email to $email", null)
+            else onFinish("","Something wrong..., please try again later")
         }
     }
-
-
 }
