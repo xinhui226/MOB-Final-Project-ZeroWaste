@@ -84,6 +84,7 @@ class ProductRepoImpl(
                 storagePlace = product.storagePlace,
                 expiryDate = product.expiryDate,
                 category = product.category,
+                productUrl = product.productUrl,
                 createdBy = product.createdBy
             ).toHash()
         ).await()

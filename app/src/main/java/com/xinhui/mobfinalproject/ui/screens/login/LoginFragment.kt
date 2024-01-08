@@ -50,6 +50,5 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(){
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
-
     }
 }

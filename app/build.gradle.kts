@@ -76,7 +76,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48.1")
     ksp("com.google.dagger:hilt-android-compiler:2.48.1")
 
-    //For SVG Images
-    implementation("com.caverock:androidsvg:1.4")
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
 }

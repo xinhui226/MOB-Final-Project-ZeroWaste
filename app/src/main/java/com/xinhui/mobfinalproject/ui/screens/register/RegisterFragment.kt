@@ -46,8 +46,5 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
 
-        lifecycleScope.launch {
-            viewModel.user.collect{ user -> }
-        }
     }
 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/addFoodFragment">
 
     <action
         android:id="@+id/toLogin"
@@ -79,4 +79,9 @@
             android:id="@+id/action_tabContainer_to_profile"
             app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addFoodFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.addFood.AddFoodFragment"
+        android:label="fragment_add_food"
+        tools:layout="@layout/fragment_add_food" />
 </navigation>

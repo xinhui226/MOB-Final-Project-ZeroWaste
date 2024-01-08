@@ -8,7 +8,8 @@ data class Product(
     var storagePlace: String,
     var expiryDate: String,
     var category: List<Category> = emptyList(),
-    var createdBy: String
+    var productUrl: String = "",
+    var createdBy: String,
 ) {
     fun toHash(): Map<String, Any?> {
         return hashMapOf(
@@ -18,6 +19,7 @@ data class Product(
             "storagePlace" to storagePlace,
             "expiryDate" to expiryDate,
             "category" to category,
+            "productUrl" to productUrl,
             "createdBy" to createdBy
         )
     }
@@ -41,6 +43,7 @@ data class Product(
                         "Vegetables" -> Category.vegetables
                         else -> Category.drinks
                 } }.toList(),
+                productUrl = hash["productUrl"].toString(),
                 createdBy = hash["createdBy"].toString()
             )
         }
