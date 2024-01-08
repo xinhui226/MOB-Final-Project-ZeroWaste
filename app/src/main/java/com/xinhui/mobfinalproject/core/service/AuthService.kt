@@ -18,4 +18,7 @@ interface AuthService {
         email:String,
         onFinish: (msg: String, err: String?) -> Unit
     )
+
+    suspend fun sendEmailVerification()
+    suspend fun refreshUser()
 }

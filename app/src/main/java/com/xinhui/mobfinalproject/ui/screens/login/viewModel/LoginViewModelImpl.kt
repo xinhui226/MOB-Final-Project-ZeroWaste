@@ -7,6 +7,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -15,16 +17,26 @@ class  LoginViewModelImpl @Inject constructor(
     private val authService: AuthService,
 ): BaseViewModel(), LoginViewModel  {
 
+    private val _loggedIn = MutableSharedFlow<Unit>()
+    override val loggedIn: SharedFlow<Unit> = _loggedIn
+    private val _emailNotVerified = MutableSharedFlow<Unit>()
+    override val emailNotVerified: SharedFlow<Unit> = _emailNotVerified
+
     override fun login(email: String, pass: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val res = errorHandler {
+            errorHandler {
                 authService.signIn(email, pass)
-            }
-
-            if(res !=  null) {
-                _success.emit("Login Successfully")
-            } else {
-                _error.emit("Login Failed")
+            }.let {
+                if(it !=  null) {
+                    authService.refreshUser()
+                    if (authService.getCurrUser()?.isEmailVerified == false) _emailNotVerified.emit(Unit)
+                    else {
+                        _success.emit("Login Successfully")
+                        _loggedIn.emit(Unit)
+                    }
+                } else {
+                    _error.emit("Login Failed")
+                }
             }
         }
     }

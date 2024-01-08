@@ -16,13 +16,24 @@ object AlertDialog {
 
         val btnSend = view.findViewById<MaterialButton>(R.id.btnSend)
         btnSend.setOnClickListener {
-            // TODO: send email
             sendEmail(etEmail.text.toString())
             dialog.dismiss()
         }
 
         val btnCancel = view.findViewById<MaterialButton>(R.id.btnCancel)
         btnCancel.setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
+    }
+
+    fun showEmailVerificationDialog(context: Context, layoutInflater: LayoutInflater) {
+        val dialog = AlertDialog.Builder(context).create()
+        val view = layoutInflater.inflate(R.layout.dialog_email_verify, null)
+        dialog.setView(view)
+        dialog.setCanceledOnTouchOutside(false)
+
+        val btnClose = view.findViewById<MaterialButton>(R.id.btnClose)
+        btnClose.setOnClickListener { dialog.dismiss() }
 
         dialog.show()
     }

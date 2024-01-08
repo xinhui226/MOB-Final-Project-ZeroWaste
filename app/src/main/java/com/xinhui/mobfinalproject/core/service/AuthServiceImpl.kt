@@ -48,4 +48,13 @@ class AuthServiceImpl(
                 onFinish("","Something wrong... please try again")
             }
     }
+
+    override suspend fun sendEmailVerification() {
+        auth.currentUser?.sendEmailVerification()?.await()
+    }
+
+    override suspend fun refreshUser() {
+        auth.currentUser?.reload()?.await()
+        Log.d("debugging", "refreshUser: is verified ${auth.currentUser?.isEmailVerified}")
+    }
 }
