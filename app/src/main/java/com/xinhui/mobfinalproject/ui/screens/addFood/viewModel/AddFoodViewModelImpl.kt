@@ -1,5 +1,6 @@
 package com.xinhui.mobfinalproject.ui.screens.addFood.viewModel
 
+import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import com.xinhui.mobfinalproject.core.service.AuthService
 import com.xinhui.mobfinalproject.core.service.StorageService
@@ -26,7 +27,7 @@ class AddFoodViewModelImpl @Inject constructor(
         quantity: Int,
         unit: String,
         expiryDate: String,
-        productUrl: String,
+        productUrl: Uri?,
         category: Category
     ) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -38,8 +39,8 @@ class AddFoodViewModelImpl @Inject constructor(
                         expiryDate = expiryDate,
                         storagePlace = storagePlace,
                         unit = unit,
-                        productUrl = productUrl,
-                        category = listOf(category),
+                        productUrl = productUrl?.toString().orEmpty(),
+                        category = category,
                         createdBy = authService.getCurrUser()?.uid.orEmpty()
                     )
                 )

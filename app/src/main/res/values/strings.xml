@@ -22,4 +22,23 @@
     <string name="chicken">Chicken</string>
     <string name="freezer">Freezer</string>
     <string name="expiring_in_2_days">Expiring in 2 days</string>
+    <string name="add_item">Add Item</string>
+    <string name="product_name">Product Name</string>
+    <string name="category">Category</string>
+    <string-array name="category">
+        <item>Diary</item>
+        <item>Fruits</item>
+        <item>Cereals &amp; Grains</item>
+        <item>Meat</item>
+        <item>Confections</item>
+        <item>Vegetables</item>
+        <item>Drinks</item>
+    </string-array>
+
+    <string name="location">Location</string>
+    <string name="quantity">Quantity</string>
+    <string name="unit">Unit</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="save">Save</string>
 </resources>

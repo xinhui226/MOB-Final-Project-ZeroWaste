@@ -19,8 +19,10 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.storage.FirebaseStorage
 import com.xinhui.mobfinalproject.R
+import com.xinhui.mobfinalproject.data.model.Category
 import com.xinhui.mobfinalproject.databinding.FragmentAddFoodBinding
 import com.xinhui.mobfinalproject.ui.screens.addFood.viewModel.AddFoodViewModelImpl
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
@@ -38,9 +40,6 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
     private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
     private val PERMISSION_CODE = 1000
-    private val IMAGE_CAPTURE_CODE = 1
-
-    var vFilename: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,29 +69,55 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
         super.setupUIComponents(view)
 
         binding.run {
-            btnSave.setOnClickListener {
-                val product = etProductName.text.toString()
-                val category = actvCategory.text.toString()
-                val storagePlace = etLocation.text.toString()
-                val quantity = etQuantity.text.toString().toIntOrNull() ?: 0
-                val unit = etUnits.text.toString()
-                val expDate = etDate.setOnClickListener {
-                    showDatePicker()
-                }
-                val addImage = btnChoose.setOnClickListener {
-                    pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                    Log.d("debugging", "choose image here")
-                }
-                val takePhoto = btnPhoto.setOnClickListener {
-                    openCamera()
-                    Log.d("debugging", "open camera here")
-                }
-
-            }
-
             val cat = resources.getStringArray(R.array.category)
             val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_items, cat)
             actvCategory.setAdapter(arrayAdapter)
+
+            var selectedCategory: Category? = null
+
+            actvCategory.setOnItemClickListener{ _, _, position, _ ->
+                val selectedCategoryString = arrayAdapter.getItem(position).toString()
+                selectedCategory = Category.values().find { it.categoryName == selectedCategoryString }
+            }
+
+            btnChoose.setOnClickListener {
+                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                Log.d("debugging", "choose image here")
+                Glide.with(requireView())
+                    .load(it)
+                    .placeholder(R.drawable.ic_image)
+                    .into(binding.ivImage)
+            }
+
+            btnPhoto.setOnClickListener {
+                openCamera()
+                Log.d("debugging", "open camera here")
+            }
+
+            etDate.setOnClickListener {
+                showDatePicker()
+            }
+
+            btnSave.setOnClickListener {
+                val product = etProductName.text.toString()
+                val storagePlace = etLocation.text.toString()
+                val quantity = etQuantity.text.toString().toIntOrNull() ?: 0
+                val unit = etUnits.text.toString()
+                val expDate = etDate.text.toString()
+                val image: Uri? = ivImage.tag as? Uri
+                if (
+                    product.isNotEmpty() &&
+                    storagePlace.isNotEmpty() && quantity != 0 &&
+                    unit.isNotEmpty() && expDate.isNotEmpty() && image != null)
+                {
+                    viewModel.addProduct(
+                        product, storagePlace, quantity, unit, expDate, image, selectedCategory!!
+                    )
+                } else {
+                    Snackbar.make(requireView(), "Please fill up all field", Snackbar.LENGTH_LONG).show()
+                    Log.d("debugging", image.toString())
+                }
+            }
         }
     }
 

@@ -46,7 +46,7 @@ class ProductRepoImpl(
             getDBRef()
                 .whereEqualTo("createdBy", authService.getUid())
                 .orderBy("expiryDate")
-                .whereArrayContains("category", category)
+                .whereEqualTo("category", category)
                 .addSnapshotListener { value, error ->
                     if(error != null) {
                         throw error
