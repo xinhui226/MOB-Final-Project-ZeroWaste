@@ -7,7 +7,7 @@ data class Product(
     var unit: String,
     var storagePlace: String,
     var expiryDate: String,
-    var category: List<Category> = emptyList(),
+    var category: Category,
     var createdBy: String
 ) {
     fun toHash(): Map<String, Any?> {
@@ -17,7 +17,7 @@ data class Product(
             "unit" to unit,
             "storagePlace" to storagePlace,
             "expiryDate" to expiryDate,
-            "category" to category,
+            "category" to category.categoryName,
             "createdBy" to createdBy
         )
     }
@@ -31,8 +31,7 @@ data class Product(
                 unit = hash["unit"].toString(),
                 storagePlace = hash["storagePlace"].toString(),
                 expiryDate = hash["expiryDate"].toString(),
-                category = (hash["category"] as ArrayList<*>).map {
-                    when(it){
+                category = when(hash["category"].toString()){
                         "Diary" -> Category.diary
                         "Fruits" -> Category.fruits
                         "Cereals & Grains" -> Category.cerealsgrains
@@ -40,7 +39,7 @@ data class Product(
                         "Confections" -> Category.confections
                         "Vegetables" -> Category.vegetables
                         else -> Category.drinks
-                } }.toList(),
+                },
                 createdBy = hash["createdBy"].toString()
             )
         }
