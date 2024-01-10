@@ -75,8 +75,8 @@ class ProductRepoImpl(
         }
     }
 
-    override suspend fun addNewProduct(product: Product) {
-        getDBRef().add(
+    override suspend fun addNewProduct(product: Product): String {
+        val doc = getDBRef().add(
             Product(
                 quantity = product.quantity,
                 productName = product.productName,
@@ -84,10 +84,9 @@ class ProductRepoImpl(
                 storagePlace = product.storagePlace,
                 expiryDate = product.expiryDate,
                 category = product.category,
-                productUrl = product.productUrl,
-                createdBy = product.createdBy
             ).toHash()
         ).await()
+        return doc.id
     }
 
     override suspend fun updateProduct(product: Product) {
