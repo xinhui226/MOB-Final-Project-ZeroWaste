@@ -1,13 +1,14 @@
 package com.xinhui.mobfinalproject.data.model
 
 data class Product(
-    var id: String? = "",
-    var quantity: Int,
-    var productName: String,
-    var unit: String,
-    var storagePlace: String,
-    var expiryDate: String,
-    var category: Category,
+    val id: String? = "",
+    val quantity: Int,
+    val productName: String,
+    val unit: String,
+    val storagePlace: String,
+    val expiryDate: String,
+    val category: Category,
+    val createdBy: String
 ) {
     fun toHash(): Map<String, Any?> {
         return hashMapOf(
@@ -17,6 +18,7 @@ data class Product(
             "storagePlace" to storagePlace,
             "expiryDate" to expiryDate,
             "category" to category.categoryName,
+            "createdBy" to createdBy
         )
     }
 
@@ -38,6 +40,7 @@ data class Product(
                         "Vegetables" -> Category.vegetables
                         else -> Category.drinks
                 },
+                createdBy = hash["createdBy"].toString()
             )
         }
     }
