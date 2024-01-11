@@ -16,10 +16,11 @@
     <string name="skip">SKIP</string>
     <string name="did_you_know"><u>Did you know?</u></string>
     <string name="next">Next</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="collection">Collection</string>
     <string name="chicken">Chicken</string>
     <string name="freezer">Freezer</string>
     <string name="expiring_in_2_days">Expiring in 2 days</string>
+    <string name="expiring_in_1_day">Expiring in 1 day</string>
+    <string name="expired">Expired</string>
 </resources>

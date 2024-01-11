@@ -10,7 +10,6 @@ import com.xinhui.mobfinalproject.databinding.FragmentRegisterBinding
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.register.viewModel.RegisterViewModelImpl
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

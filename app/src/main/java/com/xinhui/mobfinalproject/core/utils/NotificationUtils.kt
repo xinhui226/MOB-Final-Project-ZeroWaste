@@ -28,8 +28,7 @@ object NotificationUtil {
 
     fun createNotification(context: Context,
                            notificationTitle:String,
-                           notificationText:String,
-                           notificationChannelID: String
+                           notificationText:String
     ): NotificationCompat.Builder{
         val resultIntent = Intent(context, MainActivity::class.java)
 
@@ -41,8 +40,8 @@ object NotificationUtil {
             )
         }
 
-        return NotificationCompat.Builder(context, notificationChannelID)
-            .setSmallIcon(R.drawable.crop)
+        return NotificationCompat.Builder(context, Constants.expiryNotificationChannelId)
+            .setSmallIcon(R.drawable.full)
             .setContentTitle(notificationTitle)
             .setContentText(notificationText)
             .setContentIntent(resultPendingIntent)
@@ -50,7 +49,7 @@ object NotificationUtil {
             .setAutoCancel(true)
     }
 
-    fun notify(context: Context, notification: Notification, notificationId: Int) {
+    fun notify(context: Context, notification: Notification) {
         if (ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.POST_NOTIFICATIONS
@@ -60,6 +59,6 @@ object NotificationUtil {
         }
 
         NotificationManagerCompat.from(context)
-            .notify(notificationId,notification)
+            .notify(Constants.expiryNotificationId,notification)
     }
 }
