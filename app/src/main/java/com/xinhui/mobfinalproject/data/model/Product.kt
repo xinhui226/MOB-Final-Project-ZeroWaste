@@ -8,7 +8,7 @@ data class Product(
     val storagePlace: String,
     val expiryDate: String,
     val category: Category,
-    val createdBy: String
+    val createdBy: String? = null
 ) {
     fun toHash(): Map<String, Any?> {
         return hashMapOf(
