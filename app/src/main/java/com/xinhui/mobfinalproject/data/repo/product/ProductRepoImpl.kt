@@ -84,6 +84,7 @@ class ProductRepoImpl(
                 storagePlace = product.storagePlace,
                 expiryDate = product.expiryDate,
                 category = product.category,
+                createdBy = authService.getUid()
             ).toHash()
         ).await()
         return doc.id
