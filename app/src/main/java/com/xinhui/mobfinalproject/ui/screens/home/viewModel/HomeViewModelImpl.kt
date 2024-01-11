@@ -32,7 +32,7 @@ class HomeViewModelImpl @Inject constructor(
         }
     }
 
-    override fun getProducts(category: String) {
+    override fun getProductsByCategory(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             errorHandler {
                 productRepo.getProductsByCategory(category).collect {

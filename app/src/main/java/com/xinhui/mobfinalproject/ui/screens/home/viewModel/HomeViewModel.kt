@@ -7,5 +7,5 @@ interface HomeViewModel {
     val products: StateFlow<List<Product>>
 
     fun getProducts()
-    fun getProducts(category: String)
+    fun getProductsByCategory(category: String)
 }

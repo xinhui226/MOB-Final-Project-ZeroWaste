@@ -23,4 +23,6 @@
     <string name="freezer">Freezer</string>
     <string name="expiring_in_2_days">Expiring in 2 days</string>
     <string name="logout">Logout</string>
+    <string name="category">Category</string>
+    <string name="notification">Notification</string>
 </resources>

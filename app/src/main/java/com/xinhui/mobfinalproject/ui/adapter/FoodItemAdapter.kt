@@ -1,20 +1,51 @@
 package com.xinhui.mobfinalproject.ui.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.xinhui.mobfinalproject.data.model.Product
+import com.xinhui.mobfinalproject.databinding.HorizontalItemsBinding
+import com.xinhui.mobfinalproject.databinding.ShowItemLayoutBinding
 
-class FoodItemAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FoodItemAdapter(
+    private var products: List<Product>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("Not yet implemented")
+        val binding = ShowItemLayoutBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return FoodItemViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount() = products.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val pro = products[position]
+        if (holder is FoodItemViewHolder) {
+            holder.bind(pro)
+        }
+    }
+
+    fun showItems(pro: List<Product>) {
+        this.products = pro
+        notifyDataSetChanged()
+    }
+
+    inner class FoodItemViewHolder(
+        private val binding: ShowItemLayoutBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(product: Product) {
+            binding.run {
+                tvFood.text = product.productName
+                tvLocation.text = product.storagePlace
+                tvExpired.text = product.expiryDate
+            }
+        }
     }
 
 }
+
+
