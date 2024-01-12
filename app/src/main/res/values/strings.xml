@@ -16,12 +16,20 @@
     <string name="skip">SKIP</string>
     <string name="did_you_know"><u>Did you know?</u></string>
     <string name="next">Next</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="collection">Collection</string>
     <string name="chicken">Chicken</string>
     <string name="freezer">Freezer</string>
     <string name="expiring_in_2_days">Expiring in 2 days</string>
+    <string name="enter_email">Enter email</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="reset_password">Reset password</string>
+    <string name="verify_email">Verify Email</string>
+    <string name="close">CLOSE</string>
+    <string name="user_verify_email">Kindly verify your email to process login.</string>
+    <string name="expiring_in_1_day">Expiring in 1 day</string>
+    <string name="expired">Expired</string>
     <string name="logout">Logout</string>
     <string name="category">Category</string>
     <string name="notification">Notification</string>

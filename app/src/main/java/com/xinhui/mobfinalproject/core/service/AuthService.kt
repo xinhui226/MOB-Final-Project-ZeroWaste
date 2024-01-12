@@ -14,9 +14,11 @@ interface AuthService {
 
     fun getUid():String
 
-    fun updatePassword(
-        existPassword: String,
-        newPassword:String,
+    suspend fun resetPassword(
+        email:String,
         onFinish: (msg: String, err: String?) -> Unit
     )
+
+    suspend fun sendEmailVerification()
+    suspend fun refreshUser()
 }
