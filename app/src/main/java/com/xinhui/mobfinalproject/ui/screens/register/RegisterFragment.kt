@@ -48,6 +48,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
+//            viewModel.user.collect{ user -> }
             viewModel.success.collect{
                 navController.navigate(R.id.toHome)
             }
