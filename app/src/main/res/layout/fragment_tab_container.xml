@@ -5,20 +5,21 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/transparent"
     tools:context=".ui.screens.tabContainer.tabContainerFragment">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tlTabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_nav"
-        android:layout_marginBottom="25dp"
+        android:layout_marginVertical="15dp"
         android:layout_marginHorizontal="20dp"
         android:paddingTop="5dp"
         app:tabIndicatorHeight="0dp"/>

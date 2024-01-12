@@ -23,4 +23,7 @@
     <string name="expiring_in_2_days">Expiring in 2 days</string>
     <string name="expiring_in_1_day">Expiring in 1 day</string>
     <string name="expired">Expired</string>
+    <string name="logout">Logout</string>
+    <string name="category">Category</string>
+    <string name="notification">Notification</string>
 </resources>
