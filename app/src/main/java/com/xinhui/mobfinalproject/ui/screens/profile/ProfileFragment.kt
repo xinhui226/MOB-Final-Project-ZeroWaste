@@ -10,9 +10,11 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.databinding.FragmentProfileBinding
+import com.xinhui.mobfinalproject.ui.adapter.NotificationAdapter
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.profile.viewModel.ProfileViewModelImpl
 import com.xinhui.mobfinalproject.ui.screens.tabContainer.tabContainerFragmentDirections
@@ -25,6 +27,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     override val viewModel: ProfileViewModelImpl by viewModels()
 
     private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
+
+    private lateinit var adapter: NotificationAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +86,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 val action = tabContainerFragmentDirections.actionLogout()
                 navController.navigate(action)
             }
+        }
+    }
+
+
+    private fun setupAdapter() {
+        adapter = NotificationAdapter(emptyList())
+
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.run {
+            rvNotification.adapter = adapter
+            rvNotification.layoutManager = layoutManager
         }
 
     }

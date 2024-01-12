@@ -44,8 +44,6 @@ class FoodItemAdapter(
                 tvLocation.text = product.storagePlace
                 tvExpired.text = product.expiryDate
                 Glide.with(binding.root)
-
-
             }
         }
     }
