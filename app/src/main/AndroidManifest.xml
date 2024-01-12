@@ -13,6 +13,11 @@
     <uses-feature android:name="android.hardware.camera" android:required="true" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+  
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -37,7 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+      
         <provider
             android:authorities="com.xinhui.mobfinalproject.fileProvider"
             android:name="androidx.core.content.FileProvider"
@@ -49,6 +54,9 @@
                 android:resource="@xml/provider_paths"/>
 
         </provider>
+
+        <receiver
+            android:name=".core.receiver.NotifyBroadcastReceiver" />
     </application>
 
 </manifest>
