@@ -30,7 +30,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         super.setupUIComponents(view)
 
         binding.run {
-            btnLogout.setOnClickListener { viewModel.logout() }
+            icLogout.setOnClickListener { viewModel.logout() }
         }
     }
 
