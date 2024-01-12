@@ -1,11 +1,17 @@
 package com.xinhui.mobfinalproject.ui.screens.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.databinding.FragmentProfileBinding
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.profile.viewModel.ProfileViewModelImpl
@@ -17,6 +23,17 @@ import kotlinx.coroutines.launch
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override val viewModel: ProfileViewModelImpl by viewModels()
+
+    private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                viewModel.updateProfileUri(uri)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +47,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         super.setupUIComponents(view)
 
         binding.run {
-            icLogout.setOnClickListener { viewModel.logout() }
+            icLogout.setOnClickListener {
+                viewModel.logout()
+            }
+
+            ivAddImage.setOnClickListener {
+                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }
         }
     }
 
@@ -39,12 +62,19 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
         lifecycleScope.launch {
             viewModel.profilePic.collect {
-                // TODO: load profile url with Glide
+                Glide.with(requireView())
+                    .load(it)
+                    .placeholder(R.drawable.ic_image)
+                    .into(binding.ivImage)
             }
+            Log.d("debugging", "Image addedd123")
         }
         lifecycleScope.launch {
             viewModel.user.collect {
-                // TODO: replace user name
+                binding.run {
+                    tvName.text = it.name
+                    tvEmail.text = it.email
+                }
             }
         }
         lifecycleScope.launch {

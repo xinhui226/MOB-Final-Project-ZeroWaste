@@ -12,5 +12,6 @@ interface ProfileViewModel {
 
     fun getCurrUser()
     fun getProfileUri()
+    fun updateProfileUri(uri: Uri)
     fun logout()
 }

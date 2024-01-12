@@ -53,6 +53,16 @@ class ProfileViewModelImpl @Inject constructor(
         }
     }
 
+    override fun updateProfileUri(uri: Uri) {
+        user.value.id?.let {
+            viewModelScope.launch(Dispatchers.IO) {
+                val name = "${it}.jpg"
+                storageService.addImage(name,uri)
+                getProfileUri()
+            }
+        }
+    }
+
     override fun logout() {
         authService.logout()
         viewModelScope.launch { _loggedOut.emit(Unit) }

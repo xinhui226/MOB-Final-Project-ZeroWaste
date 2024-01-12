@@ -3,6 +3,7 @@ package com.xinhui.mobfinalproject.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.xinhui.mobfinalproject.data.model.Product
 import com.xinhui.mobfinalproject.databinding.HorizontalItemsBinding
 import com.xinhui.mobfinalproject.databinding.ShowItemLayoutBinding
@@ -42,6 +43,9 @@ class FoodItemAdapter(
                 tvFood.text = product.productName
                 tvLocation.text = product.storagePlace
                 tvExpired.text = product.expiryDate
+                Glide.with(binding.root)
+
+
             }
         }
     }

@@ -61,6 +61,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 foodItemAdapter.showItems(it)
             }
         }
+
+        lifecycleScope.launch {
+            viewModel.user.collect {
+                binding.tvName.text = "${it.name}'s"
+            }
+        }
     }
 
     private fun setupHorizontalAdapter() {
