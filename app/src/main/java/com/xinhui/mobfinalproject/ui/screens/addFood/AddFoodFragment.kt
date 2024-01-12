@@ -98,6 +98,10 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
                 showDatePicker()
             }
 
+            ivBack.setOnClickListener {
+                navController.popBackStack()
+            }
+
             btnSave.setOnClickListener {
                 val product = etProductName.text.toString()
                 val storagePlace = etLocation.text.toString()
@@ -108,7 +112,7 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
                 if (
                     product.isNotEmpty() &&
                     storagePlace.isNotEmpty() && quantity != 0 &&
-                    unit.isNotEmpty() && expDate.isNotEmpty() && image != null)
+                    unit.isNotEmpty() && expDate.isNotEmpty())
                 {
                     viewModel.addProduct(
                         product, storagePlace, quantity, unit, expDate, image, selectedCategory!!

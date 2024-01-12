@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_3"
     android:orientation="vertical"
     android:padding="15dp"
-    android:background="@drawable/bg_add2"
     tools:context=".ui.screens.addFood.AddFoodFragment">
 
     <LinearLayout
@@ -14,6 +14,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/ivBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -36,57 +37,87 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxStrokeColor="@color/black"
-            app:hintTextColor="@color/black"
             app:boxStrokeWidth="1dp"
             app:boxStrokeWidthFocused="1dp"
-            style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense">
+            app:hintTextColor="@color/black">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_name"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/etProductName"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:hint="@string/product_name" />
+                android:background="@drawable/text_view_outbox"
+                android:textColorHint="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            app:boxStrokeColor="@color/black"
-            app:hintTextColor="@color/black"
-            app:boxStrokeWidthFocused="1dp"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/category"
+                android:layout_marginStart="15dp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="1dp"
+                app:hintTextColor="@color/black">
 
             <AutoCompleteTextView
                 android:id="@+id/actvCategory"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:hint="@string/category" />
+                android:background="@drawable/text_view_outbox"
+                android:textStyle="bold" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxStrokeColor="@color/black"
-            app:hintTextColor="@color/black"
-            app:boxStrokeWidthFocused="1dp"
             android:hint="@string/location"
-            style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense">
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="1dp"
+            app:hintTextColor="@color/black">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/etLocation"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-
-                />
+                android:background="@drawable/text_view_outbox"
+                android:hint="e.g: Freezer, Pantry"
+                android:textColorHint="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,76 +127,88 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/black"
-                app:boxStrokeWidthFocused="1dp"
                 android:layout_weight="0.4"
-                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
-                >
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="1dp"
+                app:hintTextColor="@color/black">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/quantity"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/etQuantity"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:hint="@string/quantity" />
+                    android:background="@drawable/text_view_outbox"
+                    android:textColorHint="@color/black" />
+
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/black"
-                app:boxStrokeWidthFocused="1dp"
                 android:layout_weight="0.4"
-                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense">
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="1dp"
+                app:hintTextColor="@color/black">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/unit"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/etUnits"
+                    style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:hint="@string/unit" />
+                    android:background="@drawable/text_view_outbox"
+                    android:hint="@string/E.g_kg"
+                    android:textColorHint="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxStrokeColor="@color/black"
-            app:hintTextColor="@color/black"
             app:boxStrokeWidthFocused="1dp"
-            style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense">
+            app:hintTextColor="@color/black">
 
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/etDate"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textStyle="bold"-->
-<!--                android:hint="Expiration Date" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expiration Date"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/etDate"
+                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Expiration Date"
                 android:background="@drawable/text_view_outbox"
-                android:textStyle="bold"
                 android:textColorHint="@color/black"
-                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
-                />
+                android:textStyle="bold" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:paddingVertical="15dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingVertical="10dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
@@ -175,47 +218,50 @@
 
                 <ImageView
                     android:id="@+id/ivImage"
-                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_image"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_image" />
 
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_gravity="center_vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnChoose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/choose_image"
                     android:backgroundTint="@color/LM_blue"
-                    app:cornerRadius="15dp"/>
+                    android:text="@string/choose_image"
+                    app:cornerRadius="15dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPhoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/take_photo"
                     android:backgroundTint="@color/LM_blue"
-                    app:cornerRadius="15dp"
-                    android:paddingHorizontal="32dp" />
-
+                    android:paddingHorizontal="32dp"
+                    android:text="@string/take_photo"
+                    app:cornerRadius="15dp" />
             </LinearLayout>
+
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:backgroundTint="@color/LM_blue"
+            android:text="@string/save" />
+
     </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:backgroundTint="@color/LM_blue"
-        android:layout_marginHorizontal="50dp" />
+
 
 </LinearLayout>

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.databinding.FragmentRegisterBinding
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.register.viewModel.RegisterViewModelImpl
@@ -46,5 +48,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
 
+        lifecycleScope.launch {
+            viewModel.success.collect{
+                navController.navigate(R.id.toHome)
+            }
+        }
     }
 }

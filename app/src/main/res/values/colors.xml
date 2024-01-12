@@ -15,4 +15,6 @@
     <color name="DM_blue">#3282B8</color>
     <color name="DM_light_blue">#BBE1FA</color>
 
+
+    <color name="transparent">#00FFFFFF</color>
 </resources>
