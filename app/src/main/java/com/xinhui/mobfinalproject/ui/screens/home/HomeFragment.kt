@@ -1,13 +1,13 @@
 package com.xinhui.mobfinalproject.ui.screens.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.data.model.Category
 import com.xinhui.mobfinalproject.databinding.FragmentHomeBinding
 import com.xinhui.mobfinalproject.ui.adapter.FoodItemAdapter
@@ -39,17 +39,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             ivImage.setOnClickListener {
                 //TODO: add the action to Add Product
             }
-
-            // TODO: make changes for all the categories
-//            btnAll.setOnClickListener {
-//                viewModel.getProducts()
-//            }
-//            btnFruits.setOnClickListener {
-//                viewModel.getProducts(Category.fruits.categoryName)
-//            }
-//            btnGrains.setOnClickListener {
-//                viewModel.getProducts(Category.cerealsgrains.categoryName)
-//            }
         }
     }
 
@@ -64,7 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         lifecycleScope.launch {
             viewModel.user.collect {
-                binding.tvName.text = "${it.name}'s"
+                binding.tvName.text = getString(R.string.name_of_user, it.name)
             }
         }
     }
@@ -79,8 +68,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.rvHorizontalCategories.adapter = horizontalAdapter
         binding.rvHorizontalCategories.layoutManager = layoutManager
 
-        Log.d("debugging" ,"setupHorizontal shown")
-
     }
 
     private fun setupFoodAdapter() {
@@ -90,6 +77,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.rvHome.adapter = foodItemAdapter
         binding.rvHome.layoutManager = layoutManager
 
-        Log.d("debugging" ,"setupfoodAdp shown")
     }
 }

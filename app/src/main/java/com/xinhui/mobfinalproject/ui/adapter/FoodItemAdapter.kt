@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.xinhui.mobfinalproject.data.model.Product
-import com.xinhui.mobfinalproject.databinding.HorizontalItemsBinding
 import com.xinhui.mobfinalproject.databinding.ShowItemLayoutBinding
 
 class FoodItemAdapter(

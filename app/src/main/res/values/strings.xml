@@ -25,4 +25,7 @@
     <string name="logout">Logout</string>
     <string name="category">Category</string>
     <string name="notification">Notification</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="name_of_user">%1$s\'s</string>
 </resources>

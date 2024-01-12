@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.setFragmentResultListener
+import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.databinding.FragmentTabContainerBinding
@@ -16,18 +16,16 @@ import com.xinhui.mobfinalproject.ui.adapter.tabAdapter
 import com.xinhui.mobfinalproject.ui.screens.home.HomeFragment
 import com.xinhui.mobfinalproject.ui.screens.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
-import org.w3c.dom.Text
 
 @AndroidEntryPoint
-class tabContainerFragment : Fragment() {
+class TabContainerFragment : Fragment() {
 
     private lateinit var binding: FragmentTabContainerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         binding = FragmentTabContainerBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,7 +35,7 @@ class tabContainerFragment : Fragment() {
 
         binding.run {
             vpContainer.adapter = tabAdapter(
-                this@tabContainerFragment,
+                this@TabContainerFragment,
                 listOf(HomeFragment(), ProfileFragment())
             )
 
@@ -52,11 +50,11 @@ class tabContainerFragment : Fragment() {
                 when (position) {
                     0 -> {
                         tabIcon.setImageResource(R.drawable.ic_home)
-                        tabText.text = "Home"
+                        tabText.text = ContextCompat.getString(requireContext(), R.string.home)
                     }
                     else -> {
                         tabIcon.setImageResource(R.drawable.ic_person)
-                        tabText.text = "Profile"
+                        tabText.text = ContextCompat.getString(requireContext(), R.string.profile)
                     }
                 }
                 tab.customView = customTab

@@ -1,7 +1,6 @@
 package com.xinhui.mobfinalproject.ui.screens.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.databinding.FragmentProfileBinding
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.profile.viewModel.ProfileViewModelImpl
-import com.xinhui.mobfinalproject.ui.screens.tabContainer.tabContainerFragmentDirections
+import com.xinhui.mobfinalproject.ui.screens.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -67,7 +66,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     .placeholder(R.drawable.ic_image)
                     .into(binding.ivImage)
             }
-            Log.d("debugging", "Image addedd123")
         }
         lifecycleScope.launch {
             viewModel.user.collect {
@@ -79,7 +77,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         }
         lifecycleScope.launch {
             viewModel.loggedOut.collect {
-                val action = tabContainerFragmentDirections.actionLogout()
+                val action = TabContainerFragmentDirections.actionLogout()
                 navController.navigate(action)
             }
         }

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/transparent"
-    tools:context=".ui.screens.tabContainer.tabContainerFragment">
+    tools:context=".ui.screens.tabContainer.TabContainerFragment">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpContainer"
