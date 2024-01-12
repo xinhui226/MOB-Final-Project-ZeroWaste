@@ -22,6 +22,7 @@ class  LoginViewModelImpl @Inject constructor(
     private val _emailNotVerified = MutableSharedFlow<Unit>()
     override val emailNotVerified: SharedFlow<Unit> = _emailNotVerified
 
+
     override fun login(email: String, pass: String) {
         viewModelScope.launch(Dispatchers.IO) {
             errorHandler {
@@ -41,6 +42,7 @@ class  LoginViewModelImpl @Inject constructor(
         }
     }
 
+
     override fun sendResetPasswordLink(email: String) {
         viewModelScope.launch {
             if (email.isEmpty()) _error.emit("Email can't be empty")
@@ -50,6 +52,12 @@ class  LoginViewModelImpl @Inject constructor(
                     if (err != null) _error.emit(err)
                     else _success.emit(msg)
                 }
+                
+            if(res !=  null) {
+                _success.emit("Login Successfully")
+                _loggedIn.emit(Unit)
+            } else {
+                _error.emit("Invalid credential")
             }
         }
     }

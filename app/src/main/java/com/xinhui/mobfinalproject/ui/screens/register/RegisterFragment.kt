@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.databinding.FragmentRegisterBinding
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.register.viewModel.RegisterViewModelImpl
@@ -52,6 +53,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             viewModel.success.collect{
                 setFragmentResult("register_to_login", bundleOf("registerSuccessful" to true))
                 navController.popBackStack()
+//            viewModel.user.collect{ user -> }
+            viewModel.success.collect{
+                navController.navigate(R.id.toHome)
+
             }
         }
     }
