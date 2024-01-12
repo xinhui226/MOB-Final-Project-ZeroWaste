@@ -44,4 +44,7 @@
     <string name="expiration_date">Expiration Date</string>
     <string name="back_arrow">back arrow</string>
     <string name="product_image">product image</string>
+    <string name="logout">Logout</string>
+    <string name="category">Category</string>
+    <string name="notification">Notification</string>
 </resources>

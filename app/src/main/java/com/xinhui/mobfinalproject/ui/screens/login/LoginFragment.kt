@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.databinding.FragmentLoginBinding
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.login.viewModel.LoginViewModelImpl
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -21,7 +21,7 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -50,5 +50,11 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(){
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
+
+        lifecycleScope.launch {
+            viewModel.loggedIn.collect{
+                navController.navigate(R.id.toHome)
+            }
+        }
     }
 }
