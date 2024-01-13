@@ -36,6 +36,10 @@
     <string name="expired">Expired</string>
     <string name="logout">Logout</string>
     <string name="category">Category</string>
+    <string name="notification">Notification</string>
+    <string name="in">in</string>
+    <string name="expiring_in">Expiring in 2 days</string>
+    <string name="_05_01_2024_11_22_am">05/01/2024 | 11:22 am</string>
     <string-array name="category">
         <item>Dairy</item>
         <item>Fruit</item>

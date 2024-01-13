@@ -5,9 +5,8 @@ import kotlinx.coroutines.flow.SharedFlow
 interface LoginViewModel {
     val loggedIn: SharedFlow<Unit>
 
-interface LoginViewModel {
-    val loggedIn: SharedFlow<Unit>
     val emailNotVerified: SharedFlow<Unit>
+
     fun login(
         email: String,
         pass: String
@@ -15,3 +14,4 @@ interface LoginViewModel {
 
     fun sendResetPasswordLink(email: String)
 }
+

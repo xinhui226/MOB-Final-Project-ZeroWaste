@@ -10,9 +10,12 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.xinhui.mobfinalproject.R
+import com.xinhui.mobfinalproject.data.model.Notification
 import com.xinhui.mobfinalproject.databinding.FragmentProfileBinding
+import com.xinhui.mobfinalproject.ui.adapter.NotificationAdapter
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.profile.viewModel.ProfileViewModelImpl
 import com.xinhui.mobfinalproject.ui.screens.tabContainer.tabContainerFragmentDirections
@@ -25,6 +28,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     override val viewModel: ProfileViewModelImpl by viewModels()
 
     private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
+
+    private lateinit var adapter: NotificationAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +50,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun setupUIComponents(view: View) {
         super.setupUIComponents(view)
+
+        setupAdapter()
 
         binding.run {
             icLogout.setOnClickListener {
@@ -83,6 +90,30 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 navController.navigate(action)
             }
         }
+
+        lifecycleScope.launch {
+            viewModel.notifications.collect{
+                adapter.showNotification(it)
+            }
+        }
+    }
+
+    private fun setupAdapter() {
+        adapter = NotificationAdapter(emptyList())
+
+        adapter.listener = object: NotificationAdapter.Listener {
+            override fun onDelete(notification: Notification) {
+                viewModel.delete(notification)
+            }
+        }
+
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.run {
+            rvNotification.adapter = adapter
+            rvNotification.layoutManager = layoutManager
+        }
+
+        Log.d("debugging" ,"notification shown")
 
     }
 }

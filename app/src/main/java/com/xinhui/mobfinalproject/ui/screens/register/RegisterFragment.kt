@@ -52,13 +52,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
 
         lifecycleScope.launch {
-            viewModel.success.collect{
+            viewModel.success.collect {
                 setFragmentResult("register_to_login", bundleOf("registerSuccessful" to true))
                 navController.popBackStack()
 //            viewModel.user.collect{ user -> }
-            viewModel.success.collect{
-                navController.navigate(R.id.toHome)
+                viewModel.success.collect {
+                    navController.navigate(R.id.toHome)
 
+                }
             }
         }
     }

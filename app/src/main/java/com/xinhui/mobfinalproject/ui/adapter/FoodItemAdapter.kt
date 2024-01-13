@@ -47,6 +47,8 @@ class FoodItemAdapter(
             binding.run {
                 tvFood.text = product.productName
                 tvLocation.text = product.storagePlace
+                tvExpired.text = product.expiryDate
+                Glide.with(binding.root)
 
                 val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
                 val expiryDate = LocalDate.parse(product.expiryDate, formatter)

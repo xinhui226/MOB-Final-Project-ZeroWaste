@@ -15,7 +15,10 @@ class horizontalCategoryAdapter(
 
     private var selectedCategory: String? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): horizontalCategoryAdapter.CategoryClickViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): horizontalCategoryAdapter.CategoryClickViewHolder {
         val binding = HorizontalItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CategoryClickViewHolder(binding)
     }
