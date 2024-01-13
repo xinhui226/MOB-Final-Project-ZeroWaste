@@ -1,6 +1,8 @@
 package com.xinhui.mobfinalproject.ui.screens.home.viewModel
 
+import android.content.Context
 import androidx.lifecycle.viewModelScope
+import com.xinhui.mobfinalproject.core.utils.AlarmManagerHelper
 import com.xinhui.mobfinalproject.data.model.Product
 import com.xinhui.mobfinalproject.data.repo.product.ProductRepo
 import com.xinhui.mobfinalproject.ui.screens.base.viewModel.BaseViewModel
@@ -41,9 +43,10 @@ class HomeViewModelImpl @Inject constructor(
         }
     }
 
-    fun delete(product: Product) {
+    override fun deleteProduct(id: String, context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            product.id?.let { productRepo.deleteProduct(it) }
+                productRepo.deleteProduct(id)
+                AlarmManagerHelper.cancelAlarms(context,id)
         }
     }
 }

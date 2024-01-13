@@ -53,7 +53,7 @@ object AlarmManagerHelper {
         )
     }
 
-    fun setAlarm(context: Context, itemId: String, expiryDate: String) {
+    fun setAlarms(context: Context, itemId: String, expiryDate: String) {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         if (sdf.isLenient) {
             val date: Date = sdf.parse(expiryDate)!!

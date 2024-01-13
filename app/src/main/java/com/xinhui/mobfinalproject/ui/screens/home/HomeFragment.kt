@@ -81,7 +81,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         foodItemAdapter.listener = object : FoodItemAdapter.Listener {
             override fun onDelete(product: Product) {
-                viewModel.delete(product)
+                viewModel.deleteProduct(product.id!!, requireContext())
             }
         }
         val layoutManager = LinearLayoutManager(requireContext())

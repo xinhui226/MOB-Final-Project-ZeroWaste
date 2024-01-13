@@ -33,7 +33,11 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(){
 
         setFragmentResultListener("register_to_login") { _, bundle ->
             val result = bundle.getBoolean("registerSuccessful")
-            if (result) ShowDialog.showEmailVerificationDialog(requireContext(),layoutInflater)
+            if (result) {
+                ShowDialog.showEmailVerificationDialog(requireContext(), layoutInflater)
+                binding.etEmail.setText(bundle.getString("email"))
+                binding.etPassword.setText(bundle.getString("password"))
+            }
         }
 
         binding.run {

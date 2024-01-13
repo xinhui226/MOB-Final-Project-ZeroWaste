@@ -30,7 +30,8 @@ class  LoginViewModelImpl @Inject constructor(
             }.let {
                 if(it !=  null) {
                     authService.refreshUser()
-                    if (authService.getCurrUser()?.isEmailVerified == false) _emailNotVerified.emit(Unit)
+                    if (authService.getCurrUser()?.isEmailVerified == false)
+                        _emailNotVerified.emit(Unit)
                     else {
                         _success.emit("Login Successfully")
                         _loggedIn.emit(Unit)

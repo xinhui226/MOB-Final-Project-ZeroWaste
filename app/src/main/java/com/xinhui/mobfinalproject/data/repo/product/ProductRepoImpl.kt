@@ -93,7 +93,7 @@ class ProductRepoImpl(
     override suspend fun updateProduct(product: Product) {
         product.id.let {
             if (it.isNullOrEmpty()) throw Exception("Product id not found")
-            else getDBRef().document(it).set(product).await()
+            else getDBRef().document(it).set(product.copy(createdBy = authService.getUid())).await()
         }
     }
 

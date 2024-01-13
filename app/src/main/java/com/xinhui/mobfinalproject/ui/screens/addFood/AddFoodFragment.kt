@@ -91,7 +91,7 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
                             expiryDate = etDate.text.toString(),
                             category = cat
                         )
-                        viewModel.addProduct(product, productImgUri)
+                        viewModel.addProduct(product, productImgUri, requireContext())
                     }
                 }
             }

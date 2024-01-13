@@ -51,7 +51,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
         lifecycleScope.launch {
             viewModel.success.collect {
-                setFragmentResult("register_to_login", bundleOf("registerSuccessful" to true))
+                val bundle = bundleOf(
+                    "registerSuccessful" to true,
+                    "email" to binding.etEmail.text.toString(),
+                    "password" to binding.etPass.text.toString())
+                setFragmentResult("register_to_login", bundle)
                 navController.popBackStack()
             }
         }

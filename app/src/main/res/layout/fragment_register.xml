@@ -97,6 +97,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
             android:layout_marginHorizontal="35dp"
             android:layout_marginTop="2dp">
 
@@ -113,6 +114,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
             android:layout_marginHorizontal="35dp"
             android:layout_marginTop="2dp">
 

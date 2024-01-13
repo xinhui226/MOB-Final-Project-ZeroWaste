@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             Constants.expiryNotificationName,
             Constants.expiryNotificationChannelId)
         lifecycleScope.launch {
-            if (authService.getCurrUser() != null){
+            if (authService.getCurrUser()?.isEmailVerified == true){
                 navController.navigate(R.id.toHome)
             }
         }
