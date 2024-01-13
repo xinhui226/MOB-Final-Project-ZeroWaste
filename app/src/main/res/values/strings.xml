@@ -28,4 +28,11 @@
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="name_of_user">%1$s\'s</string>
+    <string name="edit">edit</string>
+    <string name="anonymous">anonymous</string>
+    <string name="confirm">confirm</string>
+    <string name="product_image">product image</string>
+    <string name="delete">delete</string>
+    <string name="profile_image">profile image</string>
+    <string name="upload_image">upload image</string>
 </resources>

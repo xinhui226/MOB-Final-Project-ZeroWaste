@@ -1,9 +1,11 @@
 package com.xinhui.mobfinalproject.ui.screens.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,17 +13,19 @@ import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.data.model.Category
 import com.xinhui.mobfinalproject.databinding.FragmentHomeBinding
 import com.xinhui.mobfinalproject.ui.adapter.FoodItemAdapter
-import com.xinhui.mobfinalproject.ui.adapter.horizontalCategoryAdapter
+import com.xinhui.mobfinalproject.ui.adapter.HorizontalCategoryAdapter
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.home.viewModel.HomeViewModelImpl
+import com.xinhui.mobfinalproject.ui.screens.profile.viewModel.ProfileViewModelImpl
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override val viewModel: HomeViewModelImpl by viewModels()
+    val profileVM : ProfileViewModelImpl by activityViewModels()
 
-    private lateinit var horizontalAdapter: horizontalCategoryAdapter
+    private lateinit var horizontalAdapter: HorizontalCategoryAdapter
     private lateinit var foodItemAdapter: FoodItemAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,16 +56,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         lifecycleScope.launch {
-            viewModel.user.collect {
+            profileVM.user.collect {
+                Log.d("debugging", "setupViewModelObserver: ${it.name}")
                 binding.tvName.text = getString(R.string.name_of_user, it.name)
             }
         }
     }
 
     private fun setupHorizontalAdapter() {
-        val category = Category.values()
-        horizontalAdapter = horizontalCategoryAdapter(category) {
-            viewModel.getProductsByCategory(it.categoryName)
+        horizontalAdapter = HorizontalCategoryAdapter {
+            if (it == Category.all) viewModel.getProducts()
+            else viewModel.getProducts(it.categoryName)
         }
 
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

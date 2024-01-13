@@ -26,7 +26,7 @@ class LandingPage3Fragment: Fragment() {
 
         binding.run {
             tvSkip.setOnClickListener {
-                val action = LandingPageFragmentDirections.toLogin()
+                val action = LandingPage3FragmentDirections.toLogin()
                 findNavController().navigate(action)
             }
 

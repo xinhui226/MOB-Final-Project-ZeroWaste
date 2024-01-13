@@ -1,7 +1,6 @@
 package com.xinhui.mobfinalproject.ui.screens.profile.viewModel
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.xinhui.mobfinalproject.core.service.AuthService
 import com.xinhui.mobfinalproject.core.service.StorageService
@@ -47,7 +46,6 @@ class ProfileViewModelImpl @Inject constructor(
     override fun getProfileUri() {
         viewModelScope.launch(Dispatchers.IO) {
             authService.getCurrUser()?.uid.let { id ->
-                Log.d("debugging", "getProfileUri: $id")
                 _profilePic.value = storageService.getImage("$id.jpg")
             }
         }
@@ -59,6 +57,17 @@ class ProfileViewModelImpl @Inject constructor(
                 val name = "${it}.jpg"
                 storageService.addImage(name,uri)
                 getProfileUri()
+            }
+        }
+    }
+
+    override fun updateUsername(name: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (name.length < 3)
+                _error.emit("Name has to be at least 3 characters")
+            else {
+                errorHandler { userRepo.updateUserDetail(_user.value.copy(name = name)) }
+                getCurrUser()
             }
         }
     }

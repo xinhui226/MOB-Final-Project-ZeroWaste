@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.databinding.FragmentTabContainerBinding
-import com.xinhui.mobfinalproject.ui.adapter.tabAdapter
+import com.xinhui.mobfinalproject.ui.adapter.TabAdapter
 import com.xinhui.mobfinalproject.ui.screens.home.HomeFragment
 import com.xinhui.mobfinalproject.ui.screens.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +34,7 @@ class TabContainerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.run {
-            vpContainer.adapter = tabAdapter(
+            vpContainer.adapter = TabAdapter(
                 this@TabContainerFragment,
                 listOf(HomeFragment(), ProfileFragment())
             )

@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.viewModels
+import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.xinhui.mobfinalproject.R
@@ -21,7 +22,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
-    override val viewModel: ProfileViewModelImpl by viewModels()
+    override val viewModel: ProfileViewModelImpl by activityViewModels()
 
     private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
@@ -51,7 +52,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             }
 
             ivAddImage.setOnClickListener {
-                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                pickMedia.launch(
+                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }
+
+            ivEdit.setOnClickListener {
+                etName.setText(viewModel.user.value.name)
+                showNameHideEditText(false)
+            }
+
+            ivTick.setOnClickListener {
+                if (etName.text.toString() == viewModel.user.value.name)
+                    showNameHideEditText()
+                else viewModel.updateUsername(etName.text.toString())
+            }
+
+            ivCancel.setOnClickListener {
+                showNameHideEditText()
             }
         }
     }
@@ -72,6 +89,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 binding.run {
                     tvName.text = it.name
                     tvEmail.text = it.email
+                    showNameHideEditText()
                 }
             }
         }
@@ -81,6 +99,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 navController.navigate(action)
             }
         }
+    }
 
+    private fun showNameHideEditText(show: Boolean = true) {
+        binding.run {
+            llName.isVisible = show
+            llEditName.isVisible = !show
+        }
     }
 }
