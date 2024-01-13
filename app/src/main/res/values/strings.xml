@@ -63,4 +63,6 @@
     <string name="expiring_in_day">Expiring in %1$s day</string>
     <string name="expired_day_ago">Expired %1$s day ago</string>
     <string name="logo">logo</string>
+    <string name="horizontal_line">|</string>
+    <string name="meat">Meat</string>
 </resources>

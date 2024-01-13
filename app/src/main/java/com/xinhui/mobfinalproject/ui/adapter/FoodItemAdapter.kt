@@ -55,6 +55,7 @@ class FoodItemAdapter(
                     .into(binding.ivImage)
                 tvFood.text = product.productName
                 tvLocation.text = product.storagePlace
+                tvCategory.text = product.category.categoryName
 
                 val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
                 val expiryDate = LocalDate.parse(product.expiryDate, formatter)

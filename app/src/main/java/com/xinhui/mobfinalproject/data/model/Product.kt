@@ -37,12 +37,14 @@ data class Product(
                 expiryDate = hash["expiryDate"].toString(),
                 category = when(hash["category"].toString()){
                         "Dairy" -> Category.dairy
-                        "Fruits" -> Category.fruits
-                        "Cereals & Grains" -> Category.cerealsgrains
+                        "Fruit" -> Category.fruits
+                        "Grain & Cereal" -> Category.cerealsgrains
                         "Meat" -> Category.meat
-                        "Confections" -> Category.confections
-                        "Vegetables" -> Category.vegetables
-                        else -> Category.drinks
+                        "Confection" -> Category.confections
+                        "Vegetable" -> Category.vegetables
+                        "Poultry" -> Category.poultry
+                        "Beverage" -> Category.drinks
+                        else -> Category.others
                 },
                 createdBy = hash["createdBy"].toString(),
                 productUrl = hash["productUrl"].toString()
