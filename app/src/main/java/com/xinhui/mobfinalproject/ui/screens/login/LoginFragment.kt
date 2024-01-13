@@ -56,13 +56,14 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(){
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
-            viewModel.loggedIn.collect{}
+            viewModel.loggedIn.collect {}
         }
         lifecycleScope.launch {
-            viewModel.emailNotVerified.collect{
-                AlertDialog.showEmailVerificationDialog(requireContext(),layoutInflater)
-            viewModel.loggedIn.collect{
-                navController.navigate(R.id.toHome)
+            viewModel.emailNotVerified.collect {
+                AlertDialog.showEmailVerificationDialog(requireContext(), layoutInflater)
+                viewModel.loggedIn.collect {
+                    navController.navigate(R.id.toHome)
+                }
             }
         }
     }

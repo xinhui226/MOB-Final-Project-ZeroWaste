@@ -5,7 +5,9 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.xinhui.mobfinalproject.core.service.AuthService
 import com.xinhui.mobfinalproject.core.service.StorageService
+import com.xinhui.mobfinalproject.data.model.Notification
 import com.xinhui.mobfinalproject.data.model.User
+import com.xinhui.mobfinalproject.data.repo.notification.NotificationRepo
 import com.xinhui.mobfinalproject.data.repo.user.UserRepo
 import com.xinhui.mobfinalproject.ui.screens.base.viewModel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,19 +23,37 @@ import javax.inject.Inject
 class ProfileViewModelImpl @Inject constructor(
     private val userRepo: UserRepo,
     private val storageService: StorageService,
-    private val authService: AuthService
+    private val authService: AuthService,
+    private val notificationRepo: NotificationRepo
 ): BaseViewModel(), ProfileViewModel {
 
     protected val _user = MutableStateFlow(User(name = "anonymous", email = "anonymous"))
     override val user: StateFlow<User> = _user
+
     protected val _profilePic = MutableStateFlow<Uri?>(null)
     override val profilePic: StateFlow<Uri?> = _profilePic
+
     protected val _loggedOut = MutableSharedFlow<Unit>()
     override val loggedOut: SharedFlow<Unit> = _loggedOut
+
+    protected val _notifications = MutableStateFlow<List<Notification>>(emptyList())
+    override val notifications: StateFlow<List<Notification>> = _notifications
+
 
     init {
         getCurrUser()
         getProfileUri()
+        getNotification()
+    }
+
+    override fun getNotification() {
+        viewModelScope.launch(Dispatchers.IO) {
+            errorHandler {
+                notificationRepo.getNotifications().collect {
+                    _notifications.emit(it)
+                }
+            }
+        }
     }
 
     override fun getCurrUser() {
@@ -67,4 +87,11 @@ class ProfileViewModelImpl @Inject constructor(
         authService.logout()
         viewModelScope.launch { _loggedOut.emit(Unit) }
     }
+
+    fun delete(notification: Notification) {
+        viewModelScope.launch(Dispatchers.IO) {
+            notification.id?.let { notificationRepo.deleteNotification(it) }
+        }
+    }
 }
+

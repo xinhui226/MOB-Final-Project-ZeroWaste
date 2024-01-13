@@ -10,6 +10,8 @@ class NotificationAdapter(
     private var notification: List<Notification>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    var listener: Listener? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -46,7 +48,14 @@ class NotificationAdapter(
                 tvProductName.text = notification.productName
                 tvNotifyDateTime.text = notification.notifyDateTime
                 tvExpireStatus.text = notification.expireStatus
+                ivDelete.setOnClickListener {
+                    listener?.onDelete(notification)
+                }
             }
         }
+    }
+
+    interface Listener {
+        fun onDelete(notification: Notification)
     }
 }

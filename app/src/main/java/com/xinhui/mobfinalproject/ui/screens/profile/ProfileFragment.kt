@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.xinhui.mobfinalproject.R
+import com.xinhui.mobfinalproject.data.model.Notification
 import com.xinhui.mobfinalproject.databinding.FragmentProfileBinding
 import com.xinhui.mobfinalproject.ui.adapter.NotificationAdapter
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
@@ -49,6 +50,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun setupUIComponents(view: View) {
         super.setupUIComponents(view)
+
+        setupAdapter()
 
         binding.run {
             icLogout.setOnClickListener {
@@ -87,17 +90,30 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 navController.navigate(action)
             }
         }
-    }
 
+        lifecycleScope.launch {
+            viewModel.notifications.collect{
+                adapter.showNotification(it)
+            }
+        }
+    }
 
     private fun setupAdapter() {
         adapter = NotificationAdapter(emptyList())
+
+        adapter.listener = object: NotificationAdapter.Listener {
+            override fun onDelete(notification: Notification) {
+                viewModel.delete(notification)
+            }
+        }
 
         val layoutManager = LinearLayoutManager(requireContext())
         binding.run {
             rvNotification.adapter = adapter
             rvNotification.layoutManager = layoutManager
         }
+
+        Log.d("debugging" ,"notification shown")
 
     }
 }
