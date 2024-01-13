@@ -7,10 +7,15 @@ import com.bumptech.glide.Glide
 import com.xinhui.mobfinalproject.data.model.Product
 import com.xinhui.mobfinalproject.databinding.HorizontalItemsBinding
 import com.xinhui.mobfinalproject.databinding.ShowItemLayoutBinding
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 class FoodItemAdapter(
     private var products: List<Product>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    var listener: Listener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = ShowItemLayoutBinding.inflate(
@@ -42,12 +47,24 @@ class FoodItemAdapter(
             binding.run {
                 tvFood.text = product.productName
                 tvLocation.text = product.storagePlace
-                tvExpired.text = product.expiryDate
-                Glide.with(binding.root)
 
+                val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                val expiryDate = LocalDate.parse(product.expiryDate, formatter)
+                val currDate = LocalDate.now()
+                val daysUntilExpired = ChronoUnit.DAYS.between(currDate, expiryDate)
 
+                // Update the tvExpired TextView
+                tvExpired.text = "Expiring in $daysUntilExpired days"
+
+                ivDelete.setOnClickListener {
+                    listener?.onDelete(product)
+                }
             }
         }
+    }
+
+    interface Listener {
+        fun onDelete(product: Product)
     }
 
 }

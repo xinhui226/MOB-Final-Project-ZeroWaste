@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/tabContainerFragment">
+    app:startDestination="@id/loginFragment">
 
     <action
         android:id="@+id/toLogin"
@@ -67,7 +67,12 @@
         android:id="@+id/homeFragment"
         android:name="com.xinhui.mobfinalproject.ui.screens.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_addFood"
+            app:destination="@id/addFoodFragment" />
+
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.xinhui.mobfinalproject.ui.screens.profile.ProfileFragment"
@@ -90,4 +95,9 @@
             app:popUpTo="@id/tabContainerFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/addFoodFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.addFood.AddFoodFragment"
+        android:label="fragment_add_food"
+        tools:layout="@layout/fragment_add_food" />
 </navigation>

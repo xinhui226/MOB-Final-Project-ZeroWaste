@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xinhui.mobfinalproject.data.model.Category
+import com.xinhui.mobfinalproject.data.model.Product
 import com.xinhui.mobfinalproject.databinding.FragmentHomeBinding
 import com.xinhui.mobfinalproject.ui.adapter.FoodItemAdapter
 import com.xinhui.mobfinalproject.ui.adapter.horizontalCategoryAdapter
@@ -37,7 +39,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setupFoodAdapter()
         binding.run {
             ivImage.setOnClickListener {
-                //TODO: add the action to Add Product
+                val action = HomeFragmentDirections.actionHomeToAddFood()
+                navController.navigate(action)
             }
 
             // TODO: make changes for all the categories
@@ -67,6 +70,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.tvName.text = "${it.name}'s"
             }
         }
+
+        lifecycleScope.launch{
+
+        }
     }
 
     private fun setupHorizontalAdapter() {
@@ -86,10 +93,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun setupFoodAdapter() {
         foodItemAdapter = FoodItemAdapter(emptyList())
 
+        foodItemAdapter.listener = object : FoodItemAdapter.Listener {
+            override fun onDelete(product: Product) {
+                viewModel.delete(product)
+            }
+        }
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvHome.adapter = foodItemAdapter
         binding.rvHome.layoutManager = layoutManager
 
-        Log.d("debugging" ,"setupfoodAdp shown")
     }
 }

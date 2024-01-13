@@ -27,6 +27,11 @@ class horizontalCategoryAdapter(
         holder.bind(items)
     }
 
+    fun setCategories(items: List<Category>) {
+        categories = items.toTypedArray()
+        notifyDataSetChanged()
+    }
+
     fun setSelected(id: String) {
         selectedCategory = id
         notifyDataSetChanged()

@@ -112,15 +112,11 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <androidx.legacy.widget.Space
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.1" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:layout_marginTop="15dp"
         android:orientation="vertical">
 
         <TextView

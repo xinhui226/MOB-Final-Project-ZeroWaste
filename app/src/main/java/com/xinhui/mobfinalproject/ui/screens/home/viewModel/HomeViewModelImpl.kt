@@ -1,6 +1,7 @@
 package com.xinhui.mobfinalproject.ui.screens.home.viewModel
 
 import androidx.lifecycle.viewModelScope
+import com.xinhui.mobfinalproject.data.model.Category
 import com.xinhui.mobfinalproject.data.model.Product
 import com.xinhui.mobfinalproject.data.model.User
 import com.xinhui.mobfinalproject.data.repo.product.ProductRepo
@@ -43,7 +44,8 @@ class HomeViewModelImpl @Inject constructor(
             errorHandler {
                 productRepo.getAllProducts().collect {
                     _products.emit(it)
-                } }
+                }
+            }
         }
     }
 
@@ -52,7 +54,14 @@ class HomeViewModelImpl @Inject constructor(
             errorHandler {
                 productRepo.getProductsByCategory(category).collect {
                     _products.emit(it)
-                } }
+                }
+            }
+        }
+    }
+
+    fun delete(product: Product) {
+        viewModelScope.launch(Dispatchers.IO) {
+            product.id?.let { productRepo.deleteProduct(it) }
         }
     }
 }
