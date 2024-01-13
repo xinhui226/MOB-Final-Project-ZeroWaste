@@ -1,14 +1,14 @@
 package com.xinhui.mobfinalproject.data.model
 
 data class Product(
-    var id: String? = "",
-    var quantity: Int,
-    var productName: String,
-    var unit: String,
-    var storagePlace: String,
-    var expiryDate: String,
-    var category: Category,
-    var createdBy: String
+    val id: String? = "",
+    val quantity: Int,
+    val productName: String,
+    val unit: String,
+    val storagePlace: String,
+    val expiryDate: String,
+    val category: Category,
+    val createdBy: String? = null
 ) {
     fun toHash(): Map<String, Any?> {
         return hashMapOf(

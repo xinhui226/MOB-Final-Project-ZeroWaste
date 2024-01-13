@@ -42,14 +42,15 @@
         app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
         <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
             android:src="@drawable/crop"
             tools:layout_editor_absoluteX="130dp"
             tools:layout_editor_absoluteY="173dp" />
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -84,6 +85,7 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
                 android:hint="@string/password"
                 tools:layout_editor_absoluteX="3dp"
                 tools:layout_editor_absoluteY="340dp" />
@@ -158,9 +160,9 @@
         <com.google.android.gms.common.SignInButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="100dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="35dp"
+            android:paddingHorizontal="100dp"
 
             />
 

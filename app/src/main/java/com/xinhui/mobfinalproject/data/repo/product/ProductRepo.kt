@@ -7,7 +7,7 @@ interface ProductRepo {
     suspend fun getAllProducts(): Flow<List<Product>>
     suspend fun getProductsByCategory(category: String): Flow<List<Product>>
     suspend fun getProductById(id: String): Product?
-    suspend fun addNewProduct(product: Product)
+    suspend fun addNewProduct(product: Product): String
     suspend fun updateProduct(product: Product)
     suspend fun deleteProduct(id: String)
 }

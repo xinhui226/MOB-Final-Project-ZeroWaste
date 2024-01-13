@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.databinding.FragmentTabContainerBinding
 import com.xinhui.mobfinalproject.ui.adapter.tabAdapter
+import com.xinhui.mobfinalproject.ui.screens.addFood.AddFoodFragment
 import com.xinhui.mobfinalproject.ui.screens.home.HomeFragment
 import com.xinhui.mobfinalproject.ui.screens.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +39,7 @@ class tabContainerFragment : Fragment() {
         binding.run {
             vpContainer.adapter = tabAdapter(
                 this@tabContainerFragment,
-                listOf(HomeFragment(), ProfileFragment())
+                listOf(HomeFragment(), ProfileFragment(), AddFoodFragment())
             )
 
             vpContainer.isUserInputEnabled = false
@@ -53,6 +54,10 @@ class tabContainerFragment : Fragment() {
                     0 -> {
                         tabIcon.setImageResource(R.drawable.ic_home)
                         tabText.text = "Home"
+                    }
+                    1 -> {
+                        tabIcon.setImageResource(R.drawable.ic_home)
+                        tabText.text = "Profile"
                     }
                     else -> {
                         tabIcon.setImageResource(R.drawable.ic_person)
