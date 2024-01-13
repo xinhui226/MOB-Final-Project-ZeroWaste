@@ -17,7 +17,7 @@ data class Product(
             "unit" to unit,
             "storagePlace" to storagePlace,
             "expiryDate" to expiryDate,
-            "category" to category,
+            "category" to category.categoryName,
             "createdBy" to createdBy
         )
     }
@@ -31,7 +31,7 @@ data class Product(
                 unit = hash["unit"].toString(),
                 storagePlace = hash["storagePlace"].toString(),
                 expiryDate = hash["expiryDate"].toString(),
-                category = when(hash["category"]) {
+                category = when(hash["category"].toString()){
                         "Diary" -> Category.diary
                         "Fruits" -> Category.fruits
                         "Cereals & Grains" -> Category.cerealsgrains

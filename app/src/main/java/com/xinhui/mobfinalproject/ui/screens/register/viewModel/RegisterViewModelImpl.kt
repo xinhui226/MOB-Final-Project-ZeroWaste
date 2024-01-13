@@ -25,6 +25,7 @@ class RegisterViewModelImpl @Inject constructor(
                         authService.signUp(email, pass)
                     }
                     if(user != null) {
+                        authService.sendEmailVerification()
                         _success.emit("Register Successfully")
                         errorHandler { userRepo.addNewUser(User(name = name, email = email)) }
                     }

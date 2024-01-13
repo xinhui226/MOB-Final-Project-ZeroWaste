@@ -1,6 +1,8 @@
 package com.xinhui.mobfinalproject.core.di
 
 import com.xinhui.mobfinalproject.core.service.AuthService
+import com.xinhui.mobfinalproject.data.repo.notification.NotificationRepo
+import com.xinhui.mobfinalproject.data.repo.notification.NotificationRepoImpl
 import com.xinhui.mobfinalproject.data.repo.product.ProductRepo
 import com.xinhui.mobfinalproject.data.repo.product.ProductRepoImpl
 import com.xinhui.mobfinalproject.data.repo.user.UserRepo
@@ -25,5 +27,11 @@ class RepoModule {
     @Singleton
     fun provideProductRepo(authService: AuthService): ProductRepo {
         return ProductRepoImpl(authService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNotificationRepo(authService: AuthService): NotificationRepo {
+        return NotificationRepoImpl(authService)
     }
 }
