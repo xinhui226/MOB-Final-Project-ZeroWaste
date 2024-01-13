@@ -48,6 +48,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
 
+
         lifecycleScope.launch {
             viewModel.success.collect {
                 setFragmentResult("register_to_login", bundleOf("registerSuccessful" to true))

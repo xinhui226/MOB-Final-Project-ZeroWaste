@@ -51,7 +51,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
-    val lifecycle_version = "2.6.2"
+    val lifecycle_version = "2.7.0"
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
@@ -76,8 +76,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48.1")
     ksp("com.google.dagger:hilt-android-compiler:2.48.1")
 
-    //For SVG Images
-    implementation("com.caverock:androidsvg:1.4")
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
-    implementation("com.github.bumptech.glide:glide:4.11.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }

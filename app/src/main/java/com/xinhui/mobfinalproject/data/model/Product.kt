@@ -10,7 +10,7 @@ data class Product(
     var storagePlace: String,
     var expiryDate: String,
     var category: Category,
-    var createdBy: String
+    var createdBy: String? = null
 ) {
     fun toHash(): Map<String, Any?> {
         return hashMapOf(
@@ -34,7 +34,7 @@ data class Product(
                 storagePlace = hash["storagePlace"].toString(),
                 expiryDate = hash["expiryDate"].toString(),
                 category = when(hash["category"].toString()){
-                        "Diary" -> Category.diary
+                        "Dairy" -> Category.dairy
                         "Fruits" -> Category.fruits
                         "Cereals & Grains" -> Category.cerealsgrains
                         "Meat" -> Category.meat

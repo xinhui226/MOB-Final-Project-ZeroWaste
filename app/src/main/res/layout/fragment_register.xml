@@ -46,11 +46,12 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
             android:src="@drawable/crop"
             tools:layout_editor_absoluteX="130dp"
-            tools:layout_editor_absoluteY="173dp" />
+            tools:layout_editor_absoluteY="173dp"
+            android:contentDescription="@string/logo"/>
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
@@ -103,7 +104,9 @@
                 android:id="@+id/etPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password" />
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,6 +120,7 @@
                 android:id="@+id/etConfirmPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
                 android:hint="@string/confirm_password" />
         </com.google.android.material.textfield.TextInputLayout>
 

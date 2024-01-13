@@ -26,7 +26,8 @@ class HomeViewModelImpl @Inject constructor(
             errorHandler {
                 productRepo.getAllProducts().collect {
                     _products.emit(it)
-                } }
+                }
+            }
         }
     }
 
@@ -35,7 +36,14 @@ class HomeViewModelImpl @Inject constructor(
             errorHandler {
                 productRepo.getProductsByCategory(category).collect {
                     _products.emit(it)
-                } }
+                }
+            }
+        }
+    }
+
+    fun delete(product: Product) {
+        viewModelScope.launch(Dispatchers.IO) {
+            product.id?.let { productRepo.deleteProduct(it) }
         }
     }
 }

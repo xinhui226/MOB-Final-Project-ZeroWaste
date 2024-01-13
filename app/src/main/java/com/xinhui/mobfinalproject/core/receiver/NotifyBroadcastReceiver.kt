@@ -66,7 +66,7 @@ class NotifyBroadcastReceiver: BroadcastReceiver() {
                         expireStatus = status,
                         notifyDateTime = LocalDateTime.now()
                             .format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a")),
-                        ownedBy = product.createdBy
+                        ownedBy = product.createdBy!!
                     )
                 )
             } catch (e:Exception) {

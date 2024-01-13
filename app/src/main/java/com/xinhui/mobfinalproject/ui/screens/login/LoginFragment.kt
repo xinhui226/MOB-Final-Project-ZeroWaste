@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.xinhui.mobfinalproject.core.utils.AlertDialog
 import com.xinhui.mobfinalproject.R
+import com.xinhui.mobfinalproject.core.utils.ShowDialog
 import com.xinhui.mobfinalproject.databinding.FragmentLoginBinding
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.login.viewModel.LoginViewModelImpl
@@ -33,7 +33,7 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(){
 
         setFragmentResultListener("register_to_login") { _, bundle ->
             val result = bundle.getBoolean("registerSuccessful")
-            if (result) AlertDialog.showEmailVerificationDialog(requireContext(),layoutInflater)
+            if (result) ShowDialog.showEmailVerificationDialog(requireContext(),layoutInflater)
         }
 
         binding.run {
@@ -45,7 +45,7 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(){
                 navController.navigate(action)
             }
             tvForgetPass.setOnClickListener {
-                AlertDialog.showForgetEmailDialog(requireContext(), layoutInflater) { email ->
+                ShowDialog.showForgetEmailDialog(requireContext(), layoutInflater) { email ->
                     viewModel.sendResetPasswordLink(email)
                 }
             }
@@ -62,7 +62,7 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(){
         }
         lifecycleScope.launch {
             viewModel.emailNotVerified.collect {
-                AlertDialog.showEmailVerificationDialog(requireContext(), layoutInflater)
+                ShowDialog.showEmailVerificationDialog(requireContext(), layoutInflater)
                 viewModel.loggedIn.collect {
                     navController.navigate(R.id.toHome)
                 }
