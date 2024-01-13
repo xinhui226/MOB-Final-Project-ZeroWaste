@@ -16,7 +16,6 @@
     <string name="skip">SKIP</string>
     <string name="did_you_know"><u>Did you know?</u></string>
     <string name="next">Next</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="collection">Collection</string>
     <string name="chicken">Chicken</string>
     <string name="freezer">Freezer</string>
@@ -37,23 +36,31 @@
     <string name="logout">Logout</string>
     <string name="category">Category</string>
     <string name="notification">Notification</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="name_of_user">%1$s\'s</string>
+    <string name="edit">edit</string>
+    <string name="anonymous">anonymous</string>
+    <string name="confirm">confirm</string>
+    <string name="product_image">product image</string>
+    <string name="delete">delete</string>
+    <string name="profile_image">profile image</string>
+    <string name="upload_image">upload image</string>
+    <string name="notification_title">%1$s in %2$s</string>
+    <string name="back">back</string>
+    <string name="save">Save</string>
     <string name="in">in</string>
     <string name="expiring_in">Expiring in 2 days</string>
     <string name="_05_01_2024_11_22_am">05/01/2024 | 11:22 am</string>
-    <string-array name="category">
-        <item>Dairy</item>
-        <item>Fruit</item>
-        <item>Grain &amp; Cereal</item>
-        <item>Meat</item>
-        <item>Poultry</item>
-        <item>Dessert</item>
-        <item>Vegetable</item>
-        <item>Beverage</item>
-    </string-array>
     <string name="unit">Unit</string>
     <string name="choose_image">Choose Image</string>
     <string name="take_photo">Take Photo</string>
-    <string name="save">Save</string>
-    <string name="notification"><u>Notification</u></string>
-    <string name="E.g_kg">e.g: Kg</string>
+    <string name="e_g_freezer_pantry">e.g: Freezer, Pantry</string>
+    <string name="e_g_kg">e.g: kg</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="expiring_in_days">Expiring in %1$s days</string>
+    <string name="expired_days_ago">Expired %1$s days ago</string>
+    <string name="expiring_in_day">Expiring in %1$s day</string>
+    <string name="expired_day_ago">Expired %1$s day ago</string>
+    <string name="logo">logo</string>
 </resources>

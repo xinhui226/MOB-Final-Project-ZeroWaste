@@ -39,7 +39,7 @@
         />
     <fragment
         android:id="@+id/landingPageFragment"
-        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.landingPageFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.LandingPageFragment"
         android:label="landingPageFragment"
         tools:layout="@layout/landing_page"
         >
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/landingPage2Fragment"
-        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.landingPage2Fragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.LandingPage2Fragment"
         android:label="landingPage2Fragment"
         tools:layout="@layout/landing_page2"
         >
@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/landingPage3Fragment"
-        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.landingPage3Fragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.LandingPage3Fragment"
         android:label="landingPage3Fragment"
         tools:layout="@layout/landing_page3"
         />
@@ -67,12 +67,7 @@
         android:id="@+id/homeFragment"
         android:name="com.xinhui.mobfinalproject.ui.screens.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_home_to_addFood"
-            app:destination="@id/addFoodFragment" />
-
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.xinhui.mobfinalproject.ui.screens.profile.ProfileFragment"
@@ -80,15 +75,18 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/tabContainerFragment"
-        android:name="com.xinhui.mobfinalproject.ui.screens.tabContainer.tabContainerFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.tabContainer.TabContainerFragment"
         android:label="fragment_tab_container"
         tools:layout="@layout/fragment_tab_container" >
+<!--        <action-->
+<!--            android:id="@+id/action_tabContainer_to_home"-->
+<!--            app:destination="@id/homeFragment" />-->
+<!--        <action-->
+<!--            android:id="@+id/action_tabContainer_to_profile"-->
+<!--            app:destination="@id/profileFragment" />-->
         <action
-            android:id="@+id/action_tabContainer_to_home"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_tabContainer_to_profile"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_tabContainer_to_addFood"
+            app:destination="@id/addFoodFragment" />
         <action
             android:id="@+id/action_logout"
             app:destination="@+id/loginFragment"

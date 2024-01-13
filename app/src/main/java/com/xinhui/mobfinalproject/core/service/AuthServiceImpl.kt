@@ -1,6 +1,5 @@
 package com.xinhui.mobfinalproject.core.service
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -44,7 +43,6 @@ class AuthServiceImpl(
                 } else onFinish("","Account not found, please try with another email")
             }
             .addOnFailureListener { exception ->
-                Log.w("debugging", "Error getting documents: ", exception)
                 onFinish("","Something wrong... please try again")
             }
     }
@@ -55,6 +53,5 @@ class AuthServiceImpl(
 
     override suspend fun refreshUser() {
         auth.currentUser?.reload()?.await()
-        Log.d("debugging", "refreshUser: is verified ${auth.currentUser?.isEmailVerified}")
     }
 }

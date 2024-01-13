@@ -44,10 +44,10 @@ class NotificationRepoImpl(
     override suspend fun addNotification(notification: Notification) {
         getDBRef().add(
             Notification(
-                productName = notification.productName,
+                title = notification.title,
                 notifyDateTime = notification.notifyDateTime,
                 expireStatus = notification.expireStatus,
-                ownedBy = authService.getUid()
+                ownedBy = notification.ownedBy
             ).toHash()
         ).await()
     }

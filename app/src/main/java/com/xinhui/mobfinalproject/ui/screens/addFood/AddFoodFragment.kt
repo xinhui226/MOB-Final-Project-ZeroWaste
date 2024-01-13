@@ -16,16 +16,18 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.xinhui.mobfinalproject.R
-import com.xinhui.mobfinalproject.core.utils.AlertDialog
 import com.xinhui.mobfinalproject.core.utils.BitmapConverter
-import com.xinhui.mobfinalproject.data.model.Category
+import com.xinhui.mobfinalproject.core.utils.Category
+import com.xinhui.mobfinalproject.core.utils.ShowDialog
 import com.xinhui.mobfinalproject.data.model.Product
 import com.xinhui.mobfinalproject.databinding.FragmentAddFoodBinding
 import com.xinhui.mobfinalproject.ui.screens.addFood.viewModel.AddFoodViewModelImpl
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
@@ -63,6 +65,9 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
 
         setupCatAdapter()
         binding.run {
+            ivBack.setOnClickListener {
+                navController.popBackStack()
+            }
             btnChoose.setOnClickListener {
                 pickMedia.launch(
                     PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
@@ -72,7 +77,7 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
                 openCamera()
             }
             etDate.setOnClickListener {
-                AlertDialog.showDatePicker(requireContext(), it as TextView)
+                ShowDialog.showDatePicker(requireContext(), it as TextView)
             }
             btnSave.setOnClickListener {
                 selectedCategory.let {cat ->
@@ -86,25 +91,35 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
                             expiryDate = etDate.text.toString(),
                             category = cat
                         )
-                        viewModel.addProduct(product, productImgUri)
+                        viewModel.addProduct(product, productImgUri, requireContext())
                     }
                 }
             }
         }
     }
 
+    override fun setupViewModelObserver() {
+        super.setupViewModelObserver()
+
+        lifecycleScope.launch {
+            viewModel.success.collect {
+                navController.popBackStack()
+            }
+        }
+    }
+
     private fun setupCatAdapter() {
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_items, Category.values().map { it.categoryName })
+        val categories =  Category.values().filter { it != Category.all }
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_items, categories.map { it.categoryName })
         binding.run {
             actvCategory.setAdapter(arrayAdapter)
             actvCategory.setOnItemClickListener{ _, _, position, _ ->
-                selectedCategory = Category.values()[position]
+                selectedCategory = categories[position]
             }
         }
     }
     private fun setUriLoadGlide(uri: Uri) {
         productImgUri = uri
-        // TODO: photo taken is blur and small
         Glide.with(requireView())
             .load(productImgUri)
             .placeholder(R.drawable.ic_image)
@@ -117,17 +132,4 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
         else
             Toast.makeText(requireContext(), "No camera app found", Toast.LENGTH_LONG).show()
     }
-//    TODO: has been deprecated
-//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-//        when(requestCode){
-//            PERMISSION_CODE -> {
-//                if (grantResults.isNotEmpty() && grantResults[0] ==
-//                    PackageManager.PERMISSION_GRANTED){
-//                    openCamera()
-//                } else{
-//                    Toast.makeText(requireContext(),"Permission Denied", Toast.LENGTH_LONG).show()
-//                }
-//            }
-//        }
-//    }
 }

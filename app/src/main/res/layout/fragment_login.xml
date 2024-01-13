@@ -46,7 +46,8 @@
             android:layout_height="280dp"
             android:src="@drawable/crop"
             tools:layout_editor_absoluteX="130dp"
-            tools:layout_editor_absoluteY="173dp" />
+            tools:layout_editor_absoluteY="173dp"
+            android:contentDescription="@string/logo"/>
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
@@ -77,6 +78,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
             android:layout_marginHorizontal="35dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="8dp">

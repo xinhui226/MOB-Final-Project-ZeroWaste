@@ -3,6 +3,7 @@ package com.xinhui.mobfinalproject.core.receiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.core.utils.AlarmManagerHelper
 import com.xinhui.mobfinalproject.core.utils.NotificationUtil
 import com.xinhui.mobfinalproject.data.model.Notification
@@ -33,9 +34,14 @@ class NotifyBroadcastReceiver: BroadcastReceiver() {
                 val status = data?.getStringExtra("status") ?: ""
                 data?.getStringExtra("id")?.let { id ->
                     productRepo.getProductById(id)?.let { product ->
+                        val notifTitle = context.getString(
+                            R.string.notification_title,
+                            product.productName,
+                            product.storagePlace
+                        )
                         val notificationBuilder = NotificationUtil.createNotification(
                             context,
-                            product.productName,
+                            notifTitle,
                             status)
                         NotificationUtil.notify(context, notificationBuilder.build())
                         AlarmManagerHelper.apply {
@@ -44,22 +50,23 @@ class NotifyBroadcastReceiver: BroadcastReceiver() {
                                 itemIdToRequestCodeMap.remove("$id$status")
                             }
                         }
-                        addNotification(product.productName, status)
+                        addNotification(notifTitle, status, product.createdBy!!)
                     }
                 }
             }
         }
     }
 
-    private fun addNotification(productName: String, status: String) {
+    private fun addNotification(title: String, status: String, createdBy: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 notificationRepo.addNotification(
                     Notification(
-                        productName = productName,
+                        title = title,
                         expireStatus = status,
                         notifyDateTime = LocalDateTime.now()
-                            .format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a"))
+                            .format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a")),
+                        ownedBy = createdBy
                     )
                 )
             } catch (e:Exception) {

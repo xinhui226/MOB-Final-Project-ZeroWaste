@@ -1,14 +1,14 @@
 package com.xinhui.mobfinalproject.ui.screens.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.viewModels
+import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -18,14 +18,14 @@ import com.xinhui.mobfinalproject.databinding.FragmentProfileBinding
 import com.xinhui.mobfinalproject.ui.adapter.NotificationAdapter
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.profile.viewModel.ProfileViewModelImpl
-import com.xinhui.mobfinalproject.ui.screens.tabContainer.tabContainerFragmentDirections
+import com.xinhui.mobfinalproject.ui.screens.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
-    override val viewModel: ProfileViewModelImpl by viewModels()
+    override val viewModel: ProfileViewModelImpl by activityViewModels()
 
     private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
@@ -55,11 +55,29 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
         binding.run {
             icLogout.setOnClickListener {
+                val action = TabContainerFragmentDirections.actionLogout()
+                navController.navigate(action)
                 viewModel.logout()
             }
 
             ivAddImage.setOnClickListener {
-                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                pickMedia.launch(
+                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }
+
+            ivEdit.setOnClickListener {
+                etName.setText(viewModel.user.value.name)
+                showNameHideEditText(false)
+            }
+
+            ivTick.setOnClickListener {
+                if (etName.text.toString() == viewModel.user.value.name)
+                    showNameHideEditText()
+                else viewModel.updateUsername(etName.text.toString())
+            }
+
+            ivCancel.setOnClickListener {
+                showNameHideEditText()
             }
         }
     }
@@ -68,29 +86,25 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
-            viewModel.profilePic.collect {
-                Glide.with(requireView())
-                    .load(it)
-                    .placeholder(R.drawable.ic_image)
-                    .into(binding.ivImage)
-            }
-            Log.d("debugging", "Image addedd123")
-        }
-        lifecycleScope.launch {
             viewModel.user.collect {
                 binding.run {
                     tvName.text = it.name
                     tvEmail.text = it.email
+                    Glide.with(requireView())
+                        .load(it.profileUrl)
+                        .placeholder(R.drawable.ic_image)
+                        .into(binding.ivImage)
+                    showNameHideEditText()
                 }
             }
         }
-        lifecycleScope.launch {
-            viewModel.loggedOut.collect {
-                val action = tabContainerFragmentDirections.actionLogout()
-                navController.navigate(action)
-            }
-        }
+    }
 
+    private fun showNameHideEditText(show: Boolean = true) {
+        binding.run {
+            llName.isVisible = show
+            llEditName.isVisible = !show
+        }
         lifecycleScope.launch {
             viewModel.notifications.collect{
                 adapter.showNotification(it)
@@ -112,8 +126,5 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             rvNotification.adapter = adapter
             rvNotification.layoutManager = layoutManager
         }
-
-        Log.d("debugging" ,"notification shown")
-
     }
 }

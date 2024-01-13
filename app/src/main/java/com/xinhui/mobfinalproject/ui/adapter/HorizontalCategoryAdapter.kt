@@ -4,21 +4,17 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.xinhui.mobfinalproject.R
-import com.xinhui.mobfinalproject.data.model.Category
+import com.xinhui.mobfinalproject.core.utils.Category
 import com.xinhui.mobfinalproject.databinding.HorizontalItemsBinding
 
-class horizontalCategoryAdapter(
-    private var categories: Array<Category> = Category.values(),
+class HorizontalCategoryAdapter(
     private var onCategoryClick: (Category) -> Unit
-) : RecyclerView.Adapter<horizontalCategoryAdapter.CategoryClickViewHolder>() {
+) : RecyclerView.Adapter<HorizontalCategoryAdapter.CategoryClickViewHolder>() {
 
-    private var selectedCategory: String? = null
+    private var categories: Array<Category> = Category.values()
+    private var selectedCategory: String? = "All"
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): horizontalCategoryAdapter.CategoryClickViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HorizontalCategoryAdapter.CategoryClickViewHolder {
         val binding = HorizontalItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CategoryClickViewHolder(binding)
     }
@@ -30,13 +26,8 @@ class horizontalCategoryAdapter(
         holder.bind(items)
     }
 
-    fun setCategories(items: List<Category>) {
-        categories = items.toTypedArray()
-        notifyDataSetChanged()
-    }
-
-    fun setSelected(id: String) {
-        selectedCategory = id
+    fun setSelected(cat: String) {
+        selectedCategory = cat
         notifyDataSetChanged()
     }
 
@@ -58,6 +49,7 @@ class horizontalCategoryAdapter(
 
                 itemView.setOnClickListener {
                     onCategoryClick(category)
+                    setSelected(category.categoryName)
                 }
             }
         }

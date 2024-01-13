@@ -45,7 +45,7 @@ class NotificationAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(notification: Notification) {
             binding.run {
-                tvProductName.text = notification.productName
+                tvTitle.text = notification.title
                 tvNotifyDateTime.text = notification.notifyDateTime
                 tvExpireStatus.text = notification.expireStatus
                 ivDelete.setOnClickListener {

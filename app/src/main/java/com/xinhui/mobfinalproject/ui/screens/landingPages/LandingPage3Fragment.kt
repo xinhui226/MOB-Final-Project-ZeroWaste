@@ -5,22 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.xinhui.mobfinalproject.databinding.LandingPage2Binding
-import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
-import com.xinhui.mobfinalproject.ui.screens.base.viewModel.BaseViewModel
+import com.xinhui.mobfinalproject.databinding.LandingPage3Binding
 
-class landingPage2Fragment : Fragment() {
+class LandingPage3Fragment: Fragment() {
 
-    private lateinit var binding: LandingPage2Binding
+    private lateinit var binding: LandingPage3Binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = LandingPage2Binding.inflate(inflater, container, false)
+    ): View {
+        binding = LandingPage3Binding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -29,14 +26,15 @@ class landingPage2Fragment : Fragment() {
 
         binding.run {
             tvSkip.setOnClickListener {
-                val action = landingPageFragmentDirections.toLogin()
+                val action = LandingPage3FragmentDirections.toLogin()
                 findNavController().navigate(action)
             }
 
-            btnNext.setOnClickListener {
-                val action = landingPage2FragmentDirections.actionLandingPage2ToLandingPage3()
+            btnLogin.setOnClickListener {
+                val action = LandingPage3FragmentDirections.toLogin()
                 findNavController().navigate(action)
             }
         }
+
     }
 }

@@ -15,7 +15,7 @@ import kotlinx.coroutines.runBlocking
 @HiltViewModel
 class  LoginViewModelImpl @Inject constructor(
     private val authService: AuthService,
-): BaseViewModel(), LoginViewModel {
+): BaseViewModel(), LoginViewModel  {
 
     private val _loggedIn = MutableSharedFlow<Unit>()
     override val loggedIn: SharedFlow<Unit> = _loggedIn
@@ -28,11 +28,10 @@ class  LoginViewModelImpl @Inject constructor(
             errorHandler {
                 authService.signIn(email, pass)
             }.let {
-                if (it != null) {
+                if(it !=  null) {
                     authService.refreshUser()
-                    if (authService.getCurrUser()?.isEmailVerified == false) _emailNotVerified.emit(
-                        Unit
-                    )
+                    if (authService.getCurrUser()?.isEmailVerified == false)
+                        _emailNotVerified.emit(Unit)
                     else {
                         _success.emit("Login Successfully")
                         _loggedIn.emit(Unit)
@@ -56,12 +55,6 @@ class  LoginViewModelImpl @Inject constructor(
                     if (err != null) _error.emit(err)
                     else _success.emit(msg)
                 }
-//                if (res != null) {
-//                    _success.emit("Login Successfully")
-//                    _loggedIn.emit(Unit)
-//                } else {
-//                    _error.emit("Invalid credential")
-//                }
             }
         }
     }

@@ -1,29 +1,32 @@
 package com.xinhui.mobfinalproject.ui.screens.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.xinhui.mobfinalproject.data.model.Category
 import com.xinhui.mobfinalproject.data.model.Product
+import com.xinhui.mobfinalproject.R
+import com.xinhui.mobfinalproject.core.utils.Category
 import com.xinhui.mobfinalproject.databinding.FragmentHomeBinding
 import com.xinhui.mobfinalproject.ui.adapter.FoodItemAdapter
-import com.xinhui.mobfinalproject.ui.adapter.horizontalCategoryAdapter
+import com.xinhui.mobfinalproject.ui.adapter.HorizontalCategoryAdapter
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.home.viewModel.HomeViewModelImpl
+import com.xinhui.mobfinalproject.ui.screens.profile.viewModel.ProfileViewModelImpl
+import com.xinhui.mobfinalproject.ui.screens.tabContainer.TabContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override val viewModel: HomeViewModelImpl by viewModels()
+    val profileVM : ProfileViewModelImpl by activityViewModels()
 
-    private lateinit var horizontalAdapter: horizontalCategoryAdapter
+    private lateinit var horizontalAdapter: HorizontalCategoryAdapter
     private lateinit var foodItemAdapter: FoodItemAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,20 +42,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setupFoodAdapter()
         binding.run {
             ivImage.setOnClickListener {
-                val action = HomeFragmentDirections.actionHomeToAddFood()
+                val action = TabContainerFragmentDirections.actionTabContainerToAddFood()
                 navController.navigate(action)
             }
-
-            // TODO: make changes for all the categories
-//            btnAll.setOnClickListener {
-//                viewModel.getProducts()
-//            }
-//            btnFruits.setOnClickListener {
-//                viewModel.getProducts(Category.fruits.categoryName)
-//            }
-//            btnGrains.setOnClickListener {
-//                viewModel.getProducts(Category.cerealsgrains.categoryName)
-//            }
         }
     }
 
@@ -66,27 +58,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         lifecycleScope.launch {
-            viewModel.user.collect {
-                binding.tvName.text = "${it.name}'s"
+            profileVM.user.collect {
+                binding.tvName.text = getString(R.string.name_of_user, it.name)
             }
-        }
-
-        lifecycleScope.launch{
-
         }
     }
 
     private fun setupHorizontalAdapter() {
-        val category = Category.values()
-        horizontalAdapter = horizontalCategoryAdapter(category) {
-            viewModel.getProductsByCategory(it.categoryName)
+        horizontalAdapter = HorizontalCategoryAdapter {
+            if (it == Category.all) viewModel.getProducts()
+            else viewModel.getProducts(it.categoryName)
         }
 
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvHorizontalCategories.adapter = horizontalAdapter
         binding.rvHorizontalCategories.layoutManager = layoutManager
-
-        Log.d("debugging" ,"setupHorizontal shown")
 
     }
 
@@ -95,7 +81,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         foodItemAdapter.listener = object : FoodItemAdapter.Listener {
             override fun onDelete(product: Product) {
-                viewModel.delete(product)
+                viewModel.deleteProduct(product.id!!, requireContext())
             }
         }
         val layoutManager = LinearLayoutManager(requireContext())

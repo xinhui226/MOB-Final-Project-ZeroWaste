@@ -26,9 +26,12 @@ class MainActivity : AppCompatActivity() {
 
         navController = findNavController(R.id.navHostFragment)
 
-        NotificationUtil.createNotificationChannel(this,Constants.expiryNotificationName, Constants.expiryNotificationChannelId)
+        NotificationUtil.createNotificationChannel(
+            this,
+            Constants.expiryNotificationName,
+            Constants.expiryNotificationChannelId)
         lifecycleScope.launch {
-            if (authService.getCurrUser() != null){
+            if (authService.getCurrUser()?.isEmailVerified == true){
                 navController.navigate(R.id.toHome)
             }
         }

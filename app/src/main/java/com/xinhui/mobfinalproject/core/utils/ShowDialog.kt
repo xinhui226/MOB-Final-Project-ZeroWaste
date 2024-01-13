@@ -1,11 +1,16 @@
 package com.xinhui.mobfinalproject.core.utils
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.widget.TextView
 import java.util.Calendar
+import android.view.LayoutInflater
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
+import com.xinhui.mobfinalproject.R
 
-object AlertDialog {
+object ShowDialog {
     fun showDatePicker(context: Context, tvDate: TextView) {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -20,19 +25,13 @@ object AlertDialog {
             },
             year, month, dayOfMonth
         )
-        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
-        datePickerDialog.datePicker.maxDate = System.currentTimeMillis() + 6 * 30 * 24 * 60 * 60 * 1000L
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() + 24 * 60 * 60 * 1000L
+        datePickerDialog.datePicker.maxDate =
+            System.currentTimeMillis() + 6 * 30 * 24 * 60 * 60 * 1000L
         datePickerDialog.show()
+    }
 
-import android.content.Context
-import android.view.LayoutInflater
-import androidx.appcompat.app.AlertDialog
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textfield.TextInputEditText
-import com.xinhui.mobfinalproject.R
-
-object AlertDialog {
-    fun showForgetEmailDialog(context: Context, layoutInflater: LayoutInflater, sendEmail:(String) -> Unit) {
+        fun showForgetEmailDialog(context: Context, layoutInflater: LayoutInflater, sendEmail:(String) -> Unit) {
         val dialog = AlertDialog.Builder(context).create()
         val view = layoutInflater.inflate(R.layout.dialog_forget_password, null)
         dialog.setView(view)

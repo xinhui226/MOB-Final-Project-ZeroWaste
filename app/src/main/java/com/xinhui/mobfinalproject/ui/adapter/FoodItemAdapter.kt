@@ -1,18 +1,22 @@
 package com.xinhui.mobfinalproject.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.R.color.design_default_color_error
+import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.data.model.Product
-import com.xinhui.mobfinalproject.databinding.HorizontalItemsBinding
 import com.xinhui.mobfinalproject.databinding.ShowItemLayoutBinding
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
+import kotlin.math.abs
 
 class FoodItemAdapter(
-    private var products: List<Product>
+    private var products: List<Product>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var listener: Listener? = null
@@ -45,23 +49,40 @@ class FoodItemAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             binding.run {
+                Glide.with(binding.root)
+                    .load(product.productUrl)
+                    .placeholder(R.drawable.chicken)
+                    .into(binding.ivImage)
                 tvFood.text = product.productName
                 tvLocation.text = product.storagePlace
-                tvExpired.text = product.expiryDate
-                Glide.with(binding.root)
 
                 val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
                 val expiryDate = LocalDate.parse(product.expiryDate, formatter)
                 val currDate = LocalDate.now()
                 val daysUntilExpired = ChronoUnit.DAYS.between(currDate, expiryDate)
 
-                // Update the tvExpired TextView
-                tvExpired.text = "Expiring in $daysUntilExpired days"
+                setExpiredTextColor(binding.root.context, tvExpired, daysUntilExpired)
 
                 ivDelete.setOnClickListener {
                     listener?.onDelete(product)
                 }
             }
+        }
+    }
+
+    fun setExpiredTextColor(context: Context, tv: TextView, date: Long) {
+        tv.setTextColor(
+            context.getColor(if (date > 2) R.color.black else design_default_color_error))
+        tv.text = when {
+            date.toInt() == 1 -> context.getString(
+                R.string.expiring_in_day, date.toString())
+            date.toInt() == -1 -> context.getString(
+                R.string.expired_day_ago, abs(date).toString())
+            date > 0 ->  context.getString(
+                R.string.expiring_in_days, date.toString())
+            date < 0 -> context.getString(R.string.expired_days_ago,
+                abs(date).toString())
+            else -> context.getString(R.string.expired)
         }
     }
 
