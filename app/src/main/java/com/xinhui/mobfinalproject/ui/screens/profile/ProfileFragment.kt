@@ -89,6 +89,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 binding.run {
                     tvName.text = it.name
                     tvEmail.text = it.email
+                    Glide.with(requireView())
+                        .load(it.profileUrl)
+                        .placeholder(R.drawable.ic_image)
+                        .into(binding.ivImage)
                     showNameHideEditText()
                 }
             }

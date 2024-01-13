@@ -32,7 +32,6 @@ class ProfileViewModelImpl @Inject constructor(
 
     init {
         getCurrUser()
-        getProfileUri()
     }
 
     override fun getCurrUser() {
@@ -43,20 +42,14 @@ class ProfileViewModelImpl @Inject constructor(
         }
     }
 
-    override fun getProfileUri() {
-        viewModelScope.launch(Dispatchers.IO) {
-            authService.getCurrUser()?.uid.let { id ->
-                _profilePic.value = storageService.getImage("$id.jpg")
-            }
-        }
-    }
-
     override fun updateProfileUri(uri: Uri) {
         user.value.id?.let {
             viewModelScope.launch(Dispatchers.IO) {
                 val name = "${it}.jpg"
-                storageService.addImage(name,uri)
-                getProfileUri()
+                storageService.addImage(name,uri).let { url ->
+                    userRepo.updateUserDetail(_user.value.copy(profileUrl = url))
+                    getCurrUser()
+                }
             }
         }
     }

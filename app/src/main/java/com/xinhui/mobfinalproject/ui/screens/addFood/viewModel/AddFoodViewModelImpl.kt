@@ -23,14 +23,17 @@ class AddFoodViewModelImpl @Inject constructor(
             if (err == null) {
                 errorHandler {
                     val id = productRepo.addNewProduct(product)
-                    uri?.let { storageService.addImage("$id.jpg", it) }
+                    uri?.let {
+                        storageService.addImage("$id.jpg", it).let { url ->
+                            productRepo.updateProduct(product.copy(id = id, productUrl = url))
+                        } }
                     _success.emit("Product added successfully")
                 }
             } else _error.emit(err)
         }
     }
 
-    fun addProductValidate(product: Product): String?{
+    private fun addProductValidate(product: Product): String?{
         if (product.quantity == 0) {
             return "Quantity can't be zero"
         }

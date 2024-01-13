@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.core.utils.BitmapConverter
@@ -26,6 +27,7 @@ import com.xinhui.mobfinalproject.databinding.FragmentAddFoodBinding
 import com.xinhui.mobfinalproject.ui.screens.addFood.viewModel.AddFoodViewModelImpl
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
@@ -63,6 +65,9 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
 
         setupCatAdapter()
         binding.run {
+            ivBack.setOnClickListener {
+                navController.popBackStack()
+            }
             btnChoose.setOnClickListener {
                 pickMedia.launch(
                     PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
@@ -93,12 +98,23 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
         }
     }
 
+    override fun setupViewModelObserver() {
+        super.setupViewModelObserver()
+
+        lifecycleScope.launch {
+            viewModel.success.collect {
+                navController.popBackStack()
+            }
+        }
+    }
+
     private fun setupCatAdapter() {
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_items, Category.values().filter { it != Category.all }.map { it.categoryName })
+        val categories =  Category.values().filter { it != Category.all }
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_items, categories.map { it.categoryName })
         binding.run {
             actvCategory.setAdapter(arrayAdapter)
             actvCategory.setOnItemClickListener{ _, _, position, _ ->
-                selectedCategory = Category.values()[position]
+                selectedCategory = categories[position]
             }
         }
     }

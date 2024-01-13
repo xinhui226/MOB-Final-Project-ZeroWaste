@@ -51,6 +51,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_view_outbox"
                 android:textColorHint="@color/black"
+                android:inputType="text"
+                android:autofillHints="name"
                 />
 
             <TextView
@@ -94,7 +96,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_view_outbox"
                 android:hint="@string/e_g_freezer_pantry"
-                android:textColorHint="@color/black" />
+                android:textColorHint="@color/black"
+                android:inputType="text"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -120,7 +123,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_view_outbox"
-                    android:textColorHint="@color/black" />
+                    android:textColorHint="@color/black"
+                    android:inputType="number"/>
 
 
             </LinearLayout>
@@ -147,7 +151,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_view_outbox"
                     android:hint="@string/e_g_kg"
-                    android:textColorHint="@color/black" />
+                    android:textColorHint="@color/black"
+                    android:inputType="text"/>
 
             </LinearLayout>
         </LinearLayout>

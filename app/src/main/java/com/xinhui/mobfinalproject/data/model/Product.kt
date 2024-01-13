@@ -10,7 +10,8 @@ data class Product(
     var storagePlace: String,
     var expiryDate: String,
     var category: Category,
-    var createdBy: String? = null
+    var createdBy: String? = null,
+    var productUrl: String? = null
 ) {
     fun toHash(): Map<String, Any?> {
         return hashMapOf(
@@ -20,7 +21,8 @@ data class Product(
             "storagePlace" to storagePlace,
             "expiryDate" to expiryDate,
             "category" to category.categoryName,
-            "createdBy" to createdBy
+            "createdBy" to createdBy,
+            "productUrl" to productUrl
         )
     }
 
@@ -42,7 +44,8 @@ data class Product(
                         "Vegetables" -> Category.vegetables
                         else -> Category.drinks
                 },
-                createdBy = hash["createdBy"].toString()
+                createdBy = hash["createdBy"].toString(),
+                productUrl = hash["productUrl"].toString()
             )
         }
     }

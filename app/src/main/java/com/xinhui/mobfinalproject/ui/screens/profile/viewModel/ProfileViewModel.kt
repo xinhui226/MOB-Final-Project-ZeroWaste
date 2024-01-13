@@ -11,7 +11,6 @@ interface ProfileViewModel {
     val loggedOut: SharedFlow<Unit>
 
     fun getCurrUser()
-    fun getProfileUri()
     fun updateProfileUri(uri: Uri)
     fun updateUsername(name: String)
     fun logout()

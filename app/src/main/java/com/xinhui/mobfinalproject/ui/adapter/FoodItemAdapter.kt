@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.R.color.design_default_color_error
-import com.google.android.material.R.color.error_color_material_dark
-import com.google.android.material.R.color.error_color_material_light
-import com.google.android.material.R.color.m3_ref_palette_error50
 import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.data.model.Product
 import com.xinhui.mobfinalproject.databinding.ShowItemLayoutBinding
@@ -18,7 +16,7 @@ import java.time.temporal.ChronoUnit
 import kotlin.math.abs
 
 class FoodItemAdapter(
-    private var products: List<Product>
+    private var products: List<Product>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var listener: Listener? = null
@@ -51,6 +49,10 @@ class FoodItemAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             binding.run {
+                Glide.with(binding.root)
+                    .load(product.productUrl)
+                    .placeholder(R.drawable.chicken)
+                    .into(binding.ivImage)
                 tvFood.text = product.productName
                 tvLocation.text = product.storagePlace
 
@@ -68,10 +70,6 @@ class FoodItemAdapter(
         }
     }
 
-    interface Listener {
-        fun onDelete(product: Product)
-    }
-
     fun setExpiredTextColor(context: Context, tv: TextView, date: Long) {
         tv.setTextColor(
             context.getColor(if (date > 2) R.color.black else design_default_color_error))
@@ -86,6 +84,10 @@ class FoodItemAdapter(
                 abs(date).toString())
             else -> context.getString(R.string.expired)
         }
+    }
+
+    interface Listener {
+        fun onDelete(product: Product)
     }
 
 }
