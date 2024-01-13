@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.databinding.FragmentTabContainerBinding
@@ -50,11 +49,11 @@ class TabContainerFragment : Fragment() {
                 when (position) {
                     0 -> {
                         tabIcon.setImageResource(R.drawable.ic_home)
-                        tabText.text = ContextCompat.getString(requireContext(), R.string.home)
+                        tabText.text = getString(R.string.home)
                     }
                     else -> {
                         tabIcon.setImageResource(R.drawable.ic_person)
-                        tabText.text = ContextCompat.getString(requireContext(), R.string.profile)
+                        tabText.text = getString(R.string.profile)
                     }
                 }
                 tab.customView = customTab

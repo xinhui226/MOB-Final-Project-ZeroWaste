@@ -1,5 +1,7 @@
 package com.xinhui.mobfinalproject.data.model
 
+import com.xinhui.mobfinalproject.core.utils.Category
+
 data class Product(
     var id: String? = "",
     var quantity: Int,
@@ -44,15 +46,4 @@ data class Product(
             )
         }
     }
-}
-
-enum class Category(var categoryName:String) {
-    all("All"),
-    diary("Diary"),
-    fruits("Fruits"),
-    cerealsgrains("Cereals & Grains"),
-    meat("Meat"),
-    confections("Confections"),
-    vegetables("Vegetables"),
-    drinks("Beverages")
 }

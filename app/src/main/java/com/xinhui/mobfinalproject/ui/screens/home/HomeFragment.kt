@@ -1,7 +1,6 @@
 package com.xinhui.mobfinalproject.ui.screens.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xinhui.mobfinalproject.R
-import com.xinhui.mobfinalproject.data.model.Category
+import com.xinhui.mobfinalproject.core.utils.Category
 import com.xinhui.mobfinalproject.databinding.FragmentHomeBinding
 import com.xinhui.mobfinalproject.ui.adapter.FoodItemAdapter
 import com.xinhui.mobfinalproject.ui.adapter.HorizontalCategoryAdapter
@@ -57,7 +56,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         lifecycleScope.launch {
             profileVM.user.collect {
-                Log.d("debugging", "setupViewModelObserver: ${it.name}")
                 binding.tvName.text = getString(R.string.name_of_user, it.name)
             }
         }
