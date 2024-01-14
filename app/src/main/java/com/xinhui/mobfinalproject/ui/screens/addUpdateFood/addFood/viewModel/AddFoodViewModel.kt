@@ -1,4 +1,4 @@
-package com.xinhui.mobfinalproject.ui.screens.addFood.viewModel
+package com.xinhui.mobfinalproject.ui.screens.addUpdateFood.addFood.viewModel
 
 import android.content.Context
 import android.net.Uri

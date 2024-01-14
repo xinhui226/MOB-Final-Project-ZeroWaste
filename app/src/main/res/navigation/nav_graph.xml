@@ -78,15 +78,12 @@
         android:name="com.xinhui.mobfinalproject.ui.screens.tabContainer.TabContainerFragment"
         android:label="fragment_tab_container"
         tools:layout="@layout/fragment_tab_container" >
-<!--        <action-->
-<!--            android:id="@+id/action_tabContainer_to_home"-->
-<!--            app:destination="@id/homeFragment" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_tabContainer_to_profile"-->
-<!--            app:destination="@id/profileFragment" />-->
         <action
             android:id="@+id/action_tabContainer_to_addFood"
             app:destination="@id/addFoodFragment" />
+        <action
+            android:id="@+id/action_tabContainer_to_updFood"
+            app:destination="@id/updateFoodFragment" />
         <action
             android:id="@+id/action_logout"
             app:destination="@+id/loginFragment"
@@ -95,7 +92,14 @@
     </fragment>
     <fragment
         android:id="@+id/addFoodFragment"
-        android:name="com.xinhui.mobfinalproject.ui.screens.addFood.AddFoodFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.addUpdateFood.addFood.AddFoodFragment"
         android:label="fragment_add_food"
-        tools:layout="@layout/fragment_add_food" />
+        tools:layout="@layout/fragment_base_add_update" />
+    <fragment
+        android:id="@+id/updateFoodFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.addUpdateFood.updateFood.UpdateFoodFragment"
+        android:label="fragment_update_food"
+        tools:layout="@layout/fragment_base_add_update" >
+        <argument android:name="productId" app:argType="string" />
+    </fragment>
 </navigation>

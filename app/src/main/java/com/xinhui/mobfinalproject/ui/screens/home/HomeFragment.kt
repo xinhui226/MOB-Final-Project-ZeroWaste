@@ -8,7 +8,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.xinhui.mobfinalproject.data.model.Product
 import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.core.utils.Category
 import com.xinhui.mobfinalproject.databinding.FragmentHomeBinding
@@ -80,8 +79,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         foodItemAdapter = FoodItemAdapter(emptyList())
 
         foodItemAdapter.listener = object : FoodItemAdapter.Listener {
-            override fun onDelete(product: Product) {
-                viewModel.deleteProduct(product.id!!, requireContext())
+            override fun onDelete(id: String) {
+                viewModel.deleteProduct(id, requireContext())
+            }
+            override fun onEdit(id: String) {
+                navController.navigate(
+                    TabContainerFragmentDirections.actionTabContainerToUpdFood(id)
+                )
             }
         }
         val layoutManager = LinearLayoutManager(requireContext())

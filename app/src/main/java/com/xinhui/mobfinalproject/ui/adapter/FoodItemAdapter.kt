@@ -55,6 +55,7 @@ class FoodItemAdapter(
                     .into(binding.ivImage)
                 tvFood.text = product.productName
                 tvLocation.text = product.storagePlace
+                tvCategory.text = product.category.categoryName
 
                 val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
                 val expiryDate = LocalDate.parse(product.expiryDate, formatter)
@@ -64,7 +65,10 @@ class FoodItemAdapter(
                 setExpiredTextColor(binding.root.context, tvExpired, daysUntilExpired)
 
                 ivDelete.setOnClickListener {
-                    listener?.onDelete(product)
+                    listener?.onDelete(product.id!!)
+                }
+                ivEdit.setOnClickListener {
+                    listener?.onEdit(product.id!!)
                 }
             }
         }
@@ -87,7 +91,8 @@ class FoodItemAdapter(
     }
 
     interface Listener {
-        fun onDelete(product: Product)
+        fun onDelete(id: String)
+        fun onEdit(id:String)
     }
 
 }

@@ -1,6 +1,7 @@
-package com.xinhui.mobfinalproject.ui.screens.addFood
+package com.xinhui.mobfinalproject.ui.screens.addUpdateFood.baseAddUpdate
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -23,20 +24,18 @@ import com.xinhui.mobfinalproject.core.utils.BitmapConverter
 import com.xinhui.mobfinalproject.core.utils.Category
 import com.xinhui.mobfinalproject.core.utils.ShowDialog
 import com.xinhui.mobfinalproject.data.model.Product
-import com.xinhui.mobfinalproject.databinding.FragmentAddFoodBinding
-import com.xinhui.mobfinalproject.ui.screens.addFood.viewModel.AddFoodViewModelImpl
+import com.xinhui.mobfinalproject.databinding.FragmentBaseAddUpdateBinding
+import com.xinhui.mobfinalproject.ui.screens.addUpdateFood.baseAddUpdate.viewModel.BaseAddUpdateViewModelImpl
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
-class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
+abstract class BaseAddUpdateFragment : BaseFragment<FragmentBaseAddUpdateBinding>() {
 
-    override val viewModel: AddFoodViewModelImpl by viewModels()
-    private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
-    private lateinit var takePictureLauncher: ActivityResultLauncher<Intent>
-    private var selectedCategory: Category? = null
-    private var productImgUri: Uri? = null
+    override val viewModel: BaseAddUpdateViewModelImpl by viewModels()
+    protected lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
+    protected lateinit var takePictureLauncher: ActivityResultLauncher<Intent>
+    protected var selectedCategory: Category? = null
+    protected var productImgUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +55,7 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAddFoodBinding.inflate(inflater, container, false)
+        binding = FragmentBaseAddUpdateBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -91,12 +90,13 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
                             expiryDate = etDate.text.toString(),
                             category = cat
                         )
-                        viewModel.addProduct(product, productImgUri, requireContext())
+                        submit(product, productImgUri)
                     }
                 }
             }
         }
     }
+
 
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
@@ -108,7 +108,22 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
         }
     }
 
-    private fun setupCatAdapter() {
+    protected fun setUriLoadGlide(uri: Uri) {
+        productImgUri = uri
+        Glide.with(requireView())
+            .load(productImgUri)
+            .placeholder(R.drawable.ic_image)
+            .into(binding.ivImage)
+    }
+    protected fun openCamera() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (takePictureIntent.resolveActivity(requireContext().packageManager) != null)
+            takePictureLauncher.launch(takePictureIntent)
+        else
+            Toast.makeText(requireContext(), "No camera app found", Toast.LENGTH_LONG).show()
+    }
+
+    protected fun setupCatAdapter() {
         val categories =  Category.values().filter { it != Category.all }
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_items, categories.map { it.categoryName })
         binding.run {
@@ -118,18 +133,7 @@ class AddFoodFragment : BaseFragment<FragmentAddFoodBinding>() {
             }
         }
     }
-    private fun setUriLoadGlide(uri: Uri) {
-        productImgUri = uri
-        Glide.with(requireView())
-            .load(productImgUri)
-            .placeholder(R.drawable.ic_image)
-            .into(binding.ivImage)
-    }
-    private fun openCamera() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if (takePictureIntent.resolveActivity(requireContext().packageManager) != null)
-            takePictureLauncher.launch(takePictureIntent)
-        else
-            Toast.makeText(requireContext(), "No camera app found", Toast.LENGTH_LONG).show()
-    }
+
+    abstract fun submit(product: Product, uri: Uri?, context: Context = requireContext())
+
 }
