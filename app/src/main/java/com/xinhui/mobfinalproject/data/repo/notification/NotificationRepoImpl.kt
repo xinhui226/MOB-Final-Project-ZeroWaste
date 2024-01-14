@@ -2,6 +2,7 @@ package com.xinhui.mobfinalproject.data.repo.notification
 
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.xinhui.mobfinalproject.core.service.AuthService
 import com.xinhui.mobfinalproject.data.model.Notification
 import kotlinx.coroutines.channels.awaitClose
@@ -21,6 +22,7 @@ class NotificationRepoImpl(
         val listener =
             getDBRef()
                 .whereEqualTo("ownedBy", authService.getUid())
+                .orderBy("notifyDateTime", Query.Direction.DESCENDING)
                 .addSnapshotListener { value, error ->
                     if(error != null) {
                         throw error
