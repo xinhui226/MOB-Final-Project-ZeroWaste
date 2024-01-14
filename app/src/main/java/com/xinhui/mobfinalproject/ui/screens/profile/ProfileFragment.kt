@@ -1,9 +1,11 @@
 package com.xinhui.mobfinalproject.ui.screens.profile
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -99,16 +101,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 }
             }
         }
+        lifecycleScope.launch {
+            viewModel.notifications.collect{
+                adapter.showNotification(it)
+            }
+        }
     }
 
     private fun showNameHideEditText(show: Boolean = true) {
         binding.run {
             llName.isVisible = show
             llEditName.isVisible = !show
-        }
-        lifecycleScope.launch {
-            viewModel.notifications.collect{
-                adapter.showNotification(it)
+            if (show) {
+                llEditName.clearFocus()
+                val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(llEditName.windowToken, 0)
             }
         }
     }
