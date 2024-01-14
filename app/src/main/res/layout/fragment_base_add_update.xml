@@ -7,7 +7,7 @@
     android:background="@drawable/bg_3"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".ui.screens.addFood.AddFoodFragment">
+    tools:context=".ui.screens.addUpdateFood.baseAddUpdate.BaseAddUpdateFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,6 +23,7 @@
             android:contentDescription="@string/back"/>
 
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -39,35 +40,36 @@
         android:orientation="vertical"
         android:paddingHorizontal="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/product_name"
-                android:textStyle="bold" />
-            <EditText
-                android:id="@+id/etProductName"
-                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/text_view_outbox"
-                android:textColorHint="@color/black"
-                android:inputType="text"
-                android:autofillHints="name" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_name"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etProductName"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/text_view_outbox"
+            android:textColorHint="@color/black"
+            android:inputType="text"
+            android:autofillHints="name"
+            android:labelFor="@id/etProductName"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/category"
-                android:layout_marginTop="15dp"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="1dp"
-                app:hintTextColor="@color/black">
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="1dp"
+            app:hintTextColor="@color/black">
 
             <AutoCompleteTextView
                 android:id="@+id/actvCategory"
@@ -76,27 +78,29 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_view_outbox"
                 android:textStyle="bold"
-                android:inputType="none"/>
+                android:inputType="none"
+                android:labelFor="@id/actvCategory"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/location"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"
-                />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/location"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            />
 
-            <EditText
-                android:id="@+id/etLocation"
-                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/text_view_outbox"
-                android:hint="@string/e_g_freezer_pantry"
-                android:textColorHint="@color/black"
-                android:inputType="text"/>
+        <EditText
+            android:id="@+id/etLocation"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/text_view_outbox"
+            android:hint="@string/e_g_freezer_pantry"
+            android:textColorHint="@color/black"
+            android:inputType="text"
+            android:autofillHints="freezer"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,7 +127,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_view_outbox"
                     android:textColorHint="@color/black"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:autofillHints="1"/>
 
 
             </LinearLayout>
@@ -151,26 +156,27 @@
                     android:background="@drawable/text_view_outbox"
                     android:hint="@string/e_g_kg"
                     android:textColorHint="@color/black"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:autofillHints="kg"/>
 
             </LinearLayout>
         </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="@string/expiration_date"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/expiration_date"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/etDate"
-                style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/text_view_outbox"
-                android:textColorHint="@color/black"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/etDate"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/text_view_outbox"
+            android:textColorHint="@color/black"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"

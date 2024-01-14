@@ -22,6 +22,7 @@
     <string name="expiring_in_2_days">Expiring in 2 days</string>
     <string name="product_name">Product Name</string>
     <string name="add_item">Add Item</string>
+    <string name="edit_item">Edit Item</string>
     <string name="quantity">Quantity</string>
     <string name="location">Location</string>
     <string name="enter_email">Enter email</string>
