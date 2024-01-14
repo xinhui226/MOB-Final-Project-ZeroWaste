@@ -9,6 +9,9 @@ import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.core.receiver.NotifyBroadcastReceiver
 import java.security.MessageDigest
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.Date
 import java.util.Locale
 
@@ -56,12 +59,23 @@ object AlarmManagerHelper {
     fun setAlarms(context: Context, itemId: String, expiryDate: String) {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         if (sdf.isLenient) {
+            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+            val expiryLocalDate = LocalDate.parse(expiryDate, formatter)
+            val today = LocalDate.now()
+            val daysUntilExpired = ChronoUnit.DAYS.between(today, expiryLocalDate)
+
             val date: Date = sdf.parse(expiryDate)!!
 
-            val first = date.time - 2 * 24 * 60 * 60 * 1000
+            if (daysUntilExpired > 1) {
+                val first = date.time - 2 * 24 * 60 * 60 * 1000
+                setAlarm(
+                    context,
+                    itemId,
+                    first,
+                    ContextCompat.getString(context, R.string.expiring_in_2_days)
+                )
+            }
             val sec = date.time - 24 * 60 * 60 * 1000
-
-            setAlarm(context, itemId, first, ContextCompat.getString(context, R.string.expiring_in_2_days))
             setAlarm(context, itemId, sec, ContextCompat.getString(context, R.string.expiring_in_1_day))
             setAlarm(context, itemId, date.time, ContextCompat.getString(context, R.string.expired))
         } else {
