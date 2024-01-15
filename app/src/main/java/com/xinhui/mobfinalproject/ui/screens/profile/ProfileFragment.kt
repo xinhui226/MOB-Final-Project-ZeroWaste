@@ -56,8 +56,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.run {
             icLogout.setOnClickListener {
                 val action = TabContainerFragmentDirections.actionLogout()
-                navController.navigate(action)
                 viewModel.logout()
+                navController.navigate(action)
             }
 
             ivAddImage.setOnClickListener {

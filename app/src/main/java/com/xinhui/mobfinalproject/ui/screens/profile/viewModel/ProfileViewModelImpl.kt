@@ -10,7 +10,9 @@ import com.xinhui.mobfinalproject.data.repo.notification.NotificationRepo
 import com.xinhui.mobfinalproject.data.repo.user.UserRepo
 import com.xinhui.mobfinalproject.ui.screens.base.viewModel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -23,6 +25,9 @@ class ProfileViewModelImpl @Inject constructor(
     private val authService: AuthService,
     private val notificationRepo: NotificationRepo
 ): BaseViewModel(), ProfileViewModel {
+
+    val job = SupervisorJob()
+    val scope = CoroutineScope(Dispatchers.IO + job)
 
     private val _user = MutableStateFlow(User(name = "anonymous", email = "anonymous"))
     override val user: StateFlow<User> = _user
@@ -37,7 +42,7 @@ class ProfileViewModelImpl @Inject constructor(
     }
 
     override fun getNotification() {
-        viewModelScope.launch(Dispatchers.IO) {
+        scope.launch(Dispatchers.IO) {
             errorHandler {
                 notificationRepo.getNotifications().collect {
                     _notifications.emit(it)
