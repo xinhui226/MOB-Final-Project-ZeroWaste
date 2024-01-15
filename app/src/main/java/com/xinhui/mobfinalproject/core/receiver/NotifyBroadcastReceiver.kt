@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.core.utils.AlarmManagerHelper
+import com.xinhui.mobfinalproject.core.utils.Constants
 import com.xinhui.mobfinalproject.core.utils.NotificationUtil
 import com.xinhui.mobfinalproject.data.model.Notification
 import com.xinhui.mobfinalproject.data.repo.notification.NotificationRepo
@@ -65,7 +66,7 @@ class NotifyBroadcastReceiver: BroadcastReceiver() {
                         title = title,
                         expireStatus = status,
                         notifyDateTime = LocalDateTime.now()
-                            .format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a")),
+                            .format(DateTimeFormatter.ofPattern(Constants.dateTimeFormat)),
                         ownedBy = createdBy
                     )
                 )
