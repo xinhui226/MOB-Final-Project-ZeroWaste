@@ -17,15 +17,15 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     lateinit var binding: T
     protected lateinit var navController: NavController
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = NavHostFragment.findNavController(this)
+
         setupUIComponents(view)
         setupViewModelObserver()
+
+
     }
 
     open fun setupUIComponents(view: View) {
@@ -44,6 +44,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
                showSnackbar(it)
             }
         }
+
     }
 
     fun showSnackbar(msg: String, error: Boolean = false){

@@ -27,6 +27,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private lateinit var horizontalAdapter: HorizontalCategoryAdapter
     private lateinit var foodItemAdapter: FoodItemAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
