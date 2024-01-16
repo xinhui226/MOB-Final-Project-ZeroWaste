@@ -83,6 +83,7 @@ class ProfileViewModelImpl @Inject constructor(
     }
 
     override fun logout() {
+        job.cancel()
         authService.logout()
     }
 

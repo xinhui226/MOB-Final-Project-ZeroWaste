@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.xinhui.mobfinalproject.R
+import com.xinhui.mobfinalproject.core.utils.ShowDialog
 import com.xinhui.mobfinalproject.data.model.Notification
 import com.xinhui.mobfinalproject.databinding.FragmentProfileBinding
 import com.xinhui.mobfinalproject.ui.adapter.NotificationAdapter
@@ -117,7 +118,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
         adapter.listener = object: NotificationAdapter.Listener {
             override fun onDelete(notification: Notification) {
-                viewModel.delete(notification)
+                ShowDialog.showDltConfirmationDialog(requireContext(), layoutInflater) {
+                    viewModel.delete(notification)
+                }
             }
         }
 

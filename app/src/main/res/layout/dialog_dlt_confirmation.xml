@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/DM_light_blue"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height= "wrap_content"
+        android:textSize="26sp"
+        android:textColor="@color/LM_blue"
+        android:text="@string/are_you_sure"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height= "wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/LM_blue"
+        android:layout_marginVertical="16dp"
+        android:text="@string/do_you_really_want_to_delete_the_record_this_process_can_t_be_undone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center" >
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/alert"
+            android:text="@string/yes_delete"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/LM_gray"
+            android:text="@string/no_keep_it"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+
+</LinearLayout>

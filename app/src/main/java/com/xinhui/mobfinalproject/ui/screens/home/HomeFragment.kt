@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.core.utils.Category
+import com.xinhui.mobfinalproject.core.utils.ShowDialog
 import com.xinhui.mobfinalproject.databinding.FragmentHomeBinding
 import com.xinhui.mobfinalproject.ui.adapter.FoodItemAdapter
 import com.xinhui.mobfinalproject.ui.adapter.HorizontalCategoryAdapter
@@ -80,7 +81,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         foodItemAdapter.listener = object : FoodItemAdapter.Listener {
             override fun onDelete(id: String) {
-                viewModel.deleteProduct(id, requireContext())
+                ShowDialog.showDltConfirmationDialog(requireContext(),layoutInflater){
+                    viewModel.deleteProduct(id, requireContext())
+                }
             }
             override fun onEdit(id: String) {
                 navController.navigate(
