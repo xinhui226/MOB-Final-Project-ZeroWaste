@@ -68,4 +68,20 @@ object ShowDialog {
 
         dialog.show()
     }
+
+    fun showDltConfirmationDialog(context: Context, layoutInflater: LayoutInflater, confirmDlt:()->Unit) {
+        val dialog = AlertDialog.Builder(context).create()
+        val view = layoutInflater.inflate(R.layout.dialog_dlt_confirmation, null)
+        dialog.setView(view)
+
+        val btnClose = view.findViewById<MaterialButton>(R.id.btnClose)
+        btnClose.setOnClickListener { dialog.dismiss() }
+        val btnConfirm = view.findViewById<MaterialButton>(R.id.btnConfirm)
+        btnConfirm.setOnClickListener {
+            confirmDlt()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
 }

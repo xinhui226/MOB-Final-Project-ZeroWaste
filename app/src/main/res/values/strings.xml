@@ -31,7 +31,7 @@
     <string name="reset_password">Reset password</string>
     <string name="verify_email">Verify Email</string>
     <string name="close">CLOSE</string>
-    <string name="user_verify_email">Kindly verify your email to process login.</string>
+    <string name="user_verify_email">Kindly verify your email to proceed.</string>
     <string name="expiring_in_1_day">Expiring in 1 day</string>
     <string name="expired">Expired</string>
     <string name="logout">Logout</string>
@@ -66,4 +66,8 @@
     <string name="logo">logo</string>
     <string name="horizontal_line">|</string>
     <string name="meat">Meat</string>
+    <string name="yes_delete">Yes, Delete!</string>
+    <string name="no_keep_it">No, Keep it</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="do_you_really_want_to_delete_the_record_this_process_can_t_be_undone">Do you really want to delete the record? This process can\'t be undone.</string>
 </resources>
