@@ -21,13 +21,17 @@ class RegisterViewModelImpl @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             registrationValidate(name, email, pass, confirmPass).let {
                 if (it.isNullOrEmpty()) {
+                    _isLoading.emit(true)
                     val user = errorHandler {
                         authService.signUp(email, pass)
                     }
+                    _isLoading.emit(false)
                     if(user != null) {
                         authService.sendEmailVerification()
                         _success.emit("Register Successfully")
-                        errorHandler { userRepo.addNewUser(User(name = name, email = email)) }
+                        errorHandler {
+                            userRepo.addNewUser(User(name = name, email = email))
+                        }
                     }
                 } else _error.emit(it)
             }

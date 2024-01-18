@@ -28,9 +28,8 @@ class NotifyBroadcastReceiver: BroadcastReceiver() {
     lateinit var notificationRepo: NotificationRepo
 
     override fun onReceive(context: Context?, data: Intent?) {
-        if (context == null){
-            return
-        } else {
+        if (context == null) return
+        else {
             CoroutineScope(Dispatchers.IO).launch {
                 val status = data?.getStringExtra("status") ?: ""
                 data?.getStringExtra("id")?.let { id ->

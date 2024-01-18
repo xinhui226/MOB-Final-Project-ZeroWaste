@@ -20,14 +20,18 @@ class HomeViewModelImpl @Inject constructor(
     private val _products = MutableStateFlow<List<Product>>(emptyList())
     override val products: StateFlow<List<Product>> = _products
 
-    init {
+    override fun onCreateView() {
+        super.onCreateView()
         getProducts()
     }
+
     override fun getProducts() {
         viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.emit(true)
             errorHandler {
                 productRepo.getAllProducts().collect {
                     _products.emit(it)
+                    _isLoading.emit(false)
                 }
             }
         }
@@ -35,9 +39,11 @@ class HomeViewModelImpl @Inject constructor(
 
     override fun getProducts(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.emit(true)
             errorHandler {
                 productRepo.getProductsByCategory(category).collect {
                     _products.emit(it)
+                    _isLoading.emit(false)
                 }
             }
         }
@@ -45,8 +51,8 @@ class HomeViewModelImpl @Inject constructor(
 
     override fun deleteProduct(id: String, context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-                productRepo.deleteProduct(id)
-                AlarmManagerHelper.cancelAlarms(context,id)
+            errorHandler{ productRepo.deleteProduct(id) }
+            AlarmManagerHelper.cancelAlarms(context,id)
         }
     }
 }

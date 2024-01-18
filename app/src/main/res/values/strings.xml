@@ -70,4 +70,6 @@
     <string name="no_keep_it">No, Keep it</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="do_you_really_want_to_delete_the_record_this_process_can_t_be_undone">Do you really want to delete the record? This process can\'t be undone.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_data">No Data</string>
 </resources>

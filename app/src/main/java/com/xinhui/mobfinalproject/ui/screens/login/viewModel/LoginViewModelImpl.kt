@@ -25,11 +25,13 @@ class  LoginViewModelImpl @Inject constructor(
 
     override fun login(email: String, pass: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.emit(true)
             errorHandler {
                 authService.signIn(email, pass)
             }.let {
                 if(it !=  null) {
                     authService.refreshUser()
+                    _isLoading.emit(false)
                     if (authService.getCurrUser()?.isEmailVerified == false)
                         _emailNotVerified.emit(Unit)
                     else {
@@ -37,6 +39,7 @@ class  LoginViewModelImpl @Inject constructor(
                         _loggedIn.emit(Unit)
                     }
                 } else {
+                    _isLoading.emit(false)
                     _error.emit("Login Failed")
                 }
             }

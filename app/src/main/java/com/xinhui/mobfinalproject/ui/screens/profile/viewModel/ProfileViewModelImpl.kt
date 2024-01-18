@@ -35,7 +35,6 @@ class ProfileViewModelImpl @Inject constructor(
     private val _notifications = MutableStateFlow<List<Notification>>(emptyList())
     override val notifications: StateFlow<List<Notification>> = _notifications
 
-
     init {
         getCurrUser()
         getNotification()
@@ -62,10 +61,13 @@ class ProfileViewModelImpl @Inject constructor(
     override fun updateProfileUri(uri: Uri) {
         user.value.id?.let {
             viewModelScope.launch(Dispatchers.IO) {
-                val name = "${it}.jpg"
-                storageService.addImage(name,uri).let { url ->
-                    userRepo.updateUserDetail(_user.value.copy(profileUrl = url))
-                    getCurrUser()
+                _isLoading.emit(true)
+                errorHandler {
+                    storageService.addImage("${it}.jpg", uri).let { url ->
+                        userRepo.updateUserDetail(_user.value.copy(profileUrl = url))
+                        getCurrUser()
+                        _isLoading.emit(false)
+                    }
                 }
             }
         }
@@ -76,7 +78,11 @@ class ProfileViewModelImpl @Inject constructor(
             if (name.length < 3)
                 _error.emit("Name has to be at least 3 characters")
             else {
-                errorHandler { userRepo.updateUserDetail(_user.value.copy(name = name)) }
+                _isLoading.emit(true)
+                errorHandler {
+                    userRepo.updateUserDetail(_user.value.copy(name = name))
+                    _isLoading.emit(false)
+                }
                 getCurrUser()
             }
         }
@@ -89,7 +95,9 @@ class ProfileViewModelImpl @Inject constructor(
 
     fun delete(notification: Notification) {
         viewModelScope.launch(Dispatchers.IO) {
-            notification.id?.let { notificationRepo.deleteNotification(it) }
+            notification.id?.let {
+                errorHandler{ notificationRepo.deleteNotification(it) }
+            }
         }
     }
 }

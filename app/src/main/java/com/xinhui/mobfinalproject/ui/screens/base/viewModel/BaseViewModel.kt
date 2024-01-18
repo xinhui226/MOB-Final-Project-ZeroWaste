@@ -14,8 +14,10 @@ abstract class BaseViewModel: ViewModel() {
     protected val _isLoading: MutableSharedFlow<Boolean> = MutableSharedFlow()
     val isLoading: SharedFlow<Boolean> = _isLoading
 
+    open fun onCreateView(){}
+
     suspend fun <T> errorHandler(callback: suspend () -> T): T? {
-        return try{
+        return try {
             callback()
         } catch (e: Exception){
             e.printStackTrace()

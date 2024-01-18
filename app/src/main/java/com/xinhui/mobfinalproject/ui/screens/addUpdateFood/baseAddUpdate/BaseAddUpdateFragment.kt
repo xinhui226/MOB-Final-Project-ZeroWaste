@@ -80,7 +80,7 @@ abstract class BaseAddUpdateFragment : BaseFragment<FragmentBaseAddUpdateBinding
             }
             btnSave.setOnClickListener {
                 selectedCategory.let {cat ->
-                    if (cat == null) showSnackbar("Please select the food category")
+                    if (cat == null) showSnackbar("Please select the food category", true)
                     else {
                         val product = Product(
                             quantity = etQuantity.text.toString().toIntOrNull() ?: 0,
