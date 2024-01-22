@@ -23,6 +23,7 @@ class AddFoodViewModelImpl @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val err = productValidate(product)
             if (err == null) {
+                _isLoading.emit(true)
                 errorHandler {
                     val id = productRepo.addNewProduct(product)
                     uri?.let {
@@ -30,6 +31,7 @@ class AddFoodViewModelImpl @Inject constructor(
                             productRepo.updateProduct(product.copy(id = id, productUrl = url))
                         } }
                     AlarmManagerHelper.setAlarms(context, id, product.expiryDate)
+                    _isLoading.emit(false)
                     _success.emit("Product added successfully")
                 }
             } else _error.emit(err)

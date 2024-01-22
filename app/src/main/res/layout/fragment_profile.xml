@@ -47,7 +47,7 @@
                         android:layout_height="100dp"
                         android:scaleType="fitXY"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_image"
+                        android:src="@drawable/ic_person1"
                         android:contentDescription="@string/profile_image"/>
                 </androidx.cardview.widget.CardView>
 
@@ -141,7 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:orientation="vertical">
 
         <TextView

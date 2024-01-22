@@ -8,11 +8,11 @@ import com.xinhui.mobfinalproject.core.utils.Category
 import com.xinhui.mobfinalproject.databinding.HorizontalItemsBinding
 
 class HorizontalCategoryAdapter(
+    private var selectedCategory: String,
     private var onCategoryClick: (Category) -> Unit
 ) : RecyclerView.Adapter<HorizontalCategoryAdapter.CategoryClickViewHolder>() {
 
     private var categories: Array<Category> = Category.values()
-    private var selectedCategory: String? = "All"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HorizontalCategoryAdapter.CategoryClickViewHolder {
         val binding = HorizontalItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)

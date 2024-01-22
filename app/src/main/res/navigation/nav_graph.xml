@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/landingPageFragment">
 
     <action
         android:id="@+id/toLogin"
@@ -45,7 +45,12 @@
         >
         <action
             android:id="@+id/action_landingPage_to_landingPage2"
-            app:destination="@id/landingPage2Fragment" />
+            app:destination="@id/landingPage2Fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/landingPage2Fragment"
@@ -55,7 +60,12 @@
         >
         <action
             android:id="@+id/action_landingPage2_to_landingPage3"
-            app:destination="@id/landingPage3Fragment" />
+            app:destination="@id/landingPage3Fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/landingPage3Fragment"
@@ -80,15 +90,30 @@
         tools:layout="@layout/fragment_tab_container" >
         <action
             android:id="@+id/action_tabContainer_to_addFood"
-            app:destination="@id/addFoodFragment" />
+            app:destination="@id/addFoodFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
+            />
         <action
             android:id="@+id/action_tabContainer_to_updFood"
-            app:destination="@id/updateFoodFragment" />
+            app:destination="@id/updateFoodFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
+            />
         <action
             android:id="@+id/action_logout"
             app:destination="@+id/loginFragment"
             app:popUpTo="@id/tabContainerFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/addFoodFragment"

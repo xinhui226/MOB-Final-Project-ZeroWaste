@@ -42,7 +42,7 @@ class AuthServiceImpl(
                     }
                 } else onFinish("","Account not found, please try with another email")
             }
-            .addOnFailureListener { exception ->
+            .addOnFailureListener {
                 onFinish("","Something wrong... please try again")
             }
     }

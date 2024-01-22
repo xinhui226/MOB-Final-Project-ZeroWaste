@@ -18,7 +18,7 @@ object ShowDialog {
         val calendar = Calendar.getInstance()
 
         if (selectedDate != null) {
-            calendar.time = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(selectedDate) as Date
+            calendar.time = SimpleDateFormat(Constants.dateFormat, Locale.getDefault()).parse(selectedDate) as Date
         }
 
         val year = calendar.get(Calendar.YEAR)

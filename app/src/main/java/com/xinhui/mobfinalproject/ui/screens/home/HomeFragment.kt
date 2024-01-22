@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -28,11 +29,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private lateinit var horizontalAdapter: HorizontalCategoryAdapter
     private lateinit var foodItemAdapter: FoodItemAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        profileVM.getCurrUser()
         return binding.root
     }
 
@@ -54,6 +57,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         lifecycleScope.launch {
             viewModel.products.collect {
                 foodItemAdapter.showItems(it)
+                binding.tvNoData.isVisible = it.isEmpty()
             }
         }
 
@@ -62,10 +66,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.tvName.text = getString(R.string.name_of_user, it.name)
             }
         }
+
+        lifecycleScope.launch {
+            profileVM.loggedOut.collect {
+                viewModel.stopJob()
+            }
+        }
     }
 
     private fun setupHorizontalAdapter() {
-        horizontalAdapter = HorizontalCategoryAdapter {
+        horizontalAdapter = HorizontalCategoryAdapter(viewModel.selectedCat.value.categoryName) {
             if (it == Category.all) viewModel.getProducts()
             else viewModel.getProducts(it.categoryName)
         }

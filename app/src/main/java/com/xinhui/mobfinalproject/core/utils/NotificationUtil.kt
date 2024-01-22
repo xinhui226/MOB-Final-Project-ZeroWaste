@@ -41,7 +41,8 @@ object NotificationUtil {
         }
 
         return NotificationCompat.Builder(context, Constants.expiryNotificationChannelId)
-            .setSmallIcon(R.drawable.full)
+            .setSmallIcon(R.drawable.ic_notifications)
+            .setBadgeIconType(R.drawable.ic_notifications)
             .setContentTitle(notificationTitle)
             .setContentText(notificationText)
             .setContentIntent(resultPendingIntent)

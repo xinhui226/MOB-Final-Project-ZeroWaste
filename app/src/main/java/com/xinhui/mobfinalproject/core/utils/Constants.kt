@@ -7,4 +7,13 @@ object Constants {
     const val expiryNotificationId = 3000
 
     const val dateTimeFormat = "dd-MM-yyyy hh:mm a"
+    const val dateFormat = "dd/MM/yyyy"
+    const val intentId = "id"
+    const val intentStatus = "status"
+    const val intentData = "data"
+
+    const val bundleEmail = "email"
+    const val bundlePassword = "password"
+    const val bundleRegisterSuccess = "registerSuccessful"
+    const val bundleRegToLogin = "register_to_login"
 }

@@ -8,6 +8,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.xinhui.mobfinalproject.R
+import com.xinhui.mobfinalproject.core.utils.Constants
 import com.xinhui.mobfinalproject.core.utils.ShowDialog
 import com.xinhui.mobfinalproject.databinding.FragmentLoginBinding
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
@@ -31,12 +32,12 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(){
     override fun setupUIComponents(view: View) {
         super.setupUIComponents(view)
 
-        setFragmentResultListener("register_to_login") { _, bundle ->
-            val result = bundle.getBoolean("registerSuccessful")
+        setFragmentResultListener(Constants.bundleRegToLogin) { _, bundle ->
+            val result = bundle.getBoolean(Constants.bundleRegisterSuccess)
             if (result) {
                 ShowDialog.showEmailVerificationDialog(requireContext(), layoutInflater)
-                binding.etEmail.setText(bundle.getString("email"))
-                binding.etPassword.setText(bundle.getString("password"))
+                binding.etEmail.setText(bundle.getString(Constants.bundleEmail))
+                binding.etPassword.setText(bundle.getString(Constants.bundlePassword))
             }
         }
 

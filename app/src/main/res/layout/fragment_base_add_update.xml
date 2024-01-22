@@ -53,6 +53,7 @@
             android:background="@drawable/text_view_outbox"
             android:textColorHint="@color/black"
             android:inputType="text"
+            android:textStyle="bold"
             android:autofillHints="name"
             android:labelFor="@id/etProductName"/>
 
@@ -98,6 +99,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/text_view_outbox"
             android:hint="@string/e_g_freezer_pantry"
+            android:textStyle="bold"
             android:textColorHint="@color/black"
             android:inputType="text"
             android:autofillHints="freezer"/>
@@ -127,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_view_outbox"
                     android:textColorHint="@color/black"
+                    android:textStyle="bold"
                     android:inputType="number"
                     android:autofillHints="1"/>
 
@@ -155,6 +158,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_view_outbox"
                     android:hint="@string/e_g_kg"
+                    android:textStyle="bold"
                     android:textColorHint="@color/black"
                     android:inputType="text"
                     android:autofillHints="kg"/>

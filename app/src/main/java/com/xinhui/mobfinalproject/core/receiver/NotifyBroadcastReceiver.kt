@@ -28,12 +28,11 @@ class NotifyBroadcastReceiver: BroadcastReceiver() {
     lateinit var notificationRepo: NotificationRepo
 
     override fun onReceive(context: Context?, data: Intent?) {
-        if (context == null){
-            return
-        } else {
+        if (context == null) return
+        else {
             CoroutineScope(Dispatchers.IO).launch {
-                val status = data?.getStringExtra("status") ?: ""
-                data?.getStringExtra("id")?.let { id ->
+                val status = data?.getStringExtra(Constants.intentStatus) ?: ""
+                data?.getStringExtra(Constants.intentId)?.let { id ->
                     productRepo.getProductById(id)?.let { product ->
                         val notifTitle = context.getString(
                             R.string.notification_title,

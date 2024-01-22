@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.xinhui.mobfinalproject.core.utils.Constants
 import com.xinhui.mobfinalproject.databinding.FragmentRegisterBinding
 import com.xinhui.mobfinalproject.ui.screens.base.BaseFragment
 import com.xinhui.mobfinalproject.ui.screens.register.viewModel.RegisterViewModelImpl
@@ -52,10 +53,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         lifecycleScope.launch {
             viewModel.success.collect {
                 val bundle = bundleOf(
-                    "registerSuccessful" to true,
-                    "email" to binding.etEmail.text.toString(),
-                    "password" to binding.etPass.text.toString())
-                setFragmentResult("register_to_login", bundle)
+                    Constants.bundleRegisterSuccess to true,
+                    Constants.bundleEmail to binding.etEmail.text.toString(),
+                    Constants.bundlePassword to binding.etPass.text.toString())
+                setFragmentResult(Constants.bundleRegToLogin, bundle)
                 navController.popBackStack()
             }
         }
