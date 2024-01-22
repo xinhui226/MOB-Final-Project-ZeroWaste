@@ -35,6 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        profileVM.getCurrUser()
         return binding.root
     }
 
@@ -65,10 +66,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.tvName.text = getString(R.string.name_of_user, it.name)
             }
         }
+
+        lifecycleScope.launch {
+            profileVM.loggedOut.collect {
+                viewModel.stopJob()
+            }
+        }
     }
 
     private fun setupHorizontalAdapter() {
-        horizontalAdapter = HorizontalCategoryAdapter {
+        horizontalAdapter = HorizontalCategoryAdapter(viewModel.selectedCat.value.categoryName) {
             if (it == Category.all) viewModel.getProducts()
             else viewModel.getProducts(it.categoryName)
         }

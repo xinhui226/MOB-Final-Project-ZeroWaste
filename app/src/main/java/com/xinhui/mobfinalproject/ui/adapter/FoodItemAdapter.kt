@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.R.color.design_default_color_error
 import com.xinhui.mobfinalproject.R
+import com.xinhui.mobfinalproject.core.utils.Constants
 import com.xinhui.mobfinalproject.data.model.Product
 import com.xinhui.mobfinalproject.databinding.ShowItemLayoutBinding
 import java.time.LocalDate
@@ -57,7 +58,7 @@ class FoodItemAdapter(
                 tvLocation.text = product.storagePlace
                 tvCategory.text = product.category.categoryName
 
-                val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                val formatter = DateTimeFormatter.ofPattern(Constants.dateFormat)
                 val expiryDate = LocalDate.parse(product.expiryDate, formatter)
                 val currDate = LocalDate.now()
                 val daysUntilExpired = ChronoUnit.DAYS.between(currDate, expiryDate)

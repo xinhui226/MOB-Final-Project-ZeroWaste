@@ -31,8 +31,8 @@ class NotifyBroadcastReceiver: BroadcastReceiver() {
         if (context == null) return
         else {
             CoroutineScope(Dispatchers.IO).launch {
-                val status = data?.getStringExtra("status") ?: ""
-                data?.getStringExtra("id")?.let { id ->
+                val status = data?.getStringExtra(Constants.intentStatus) ?: ""
+                data?.getStringExtra(Constants.intentId)?.let { id ->
                     productRepo.getProductById(id)?.let { product ->
                         val notifTitle = context.getString(
                             R.string.notification_title,

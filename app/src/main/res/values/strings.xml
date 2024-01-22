@@ -77,4 +77,6 @@
     <string name="store_in_fridge">store in fridge</string>
     <string name="landing_page_2">Your fridge might be causing food waste. People often throw away a lot of food just because they forget it\'s in the back of the fridge. If we pay more attention to how we store food and organize our fridges better, we can avoid wasting good food that gets overlooked.</string>
     <string name="landing_page_3">Wasting food isn\'t just tossing what\'s on your plate—it squanders energy, water, and land used in food production. Reducing food waste saves money and conserves vital resources.</string>
+    <string name="no_camera_found">No camera app found</string>
+    <string name="select_food_category">Please select the food category</string>
 </resources>

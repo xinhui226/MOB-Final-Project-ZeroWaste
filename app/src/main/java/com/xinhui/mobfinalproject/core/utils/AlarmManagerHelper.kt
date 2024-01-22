@@ -44,8 +44,8 @@ object AlarmManagerHelper {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, NotifyBroadcastReceiver::class.java)
         intent.action = ACTION_SHOW_NOTIFICATION
-        intent.putExtra("id", itemId)
-        intent.putExtra("status", status)
+        intent.putExtra(Constants.intentId, itemId)
+        intent.putExtra(Constants.intentStatus, status)
 
         val pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_IMMUTABLE)
 
@@ -57,9 +57,9 @@ object AlarmManagerHelper {
     }
 
     fun setAlarms(context: Context, itemId: String, expiryDate: String) {
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val sdf = SimpleDateFormat(Constants.dateFormat, Locale.getDefault())
         if (sdf.isLenient) {
-            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+            val formatter = DateTimeFormatter.ofPattern(Constants.dateFormat)
             val expiryLocalDate = LocalDate.parse(expiryDate, formatter)
             val today = LocalDate.now()
             val daysUntilExpired = ChronoUnit.DAYS.between(today, expiryLocalDate)

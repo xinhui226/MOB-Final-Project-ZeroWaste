@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.xinhui.mobfinalproject.R
 import com.xinhui.mobfinalproject.core.utils.BitmapConverter
 import com.xinhui.mobfinalproject.core.utils.Category
+import com.xinhui.mobfinalproject.core.utils.Constants
 import com.xinhui.mobfinalproject.core.utils.ShowDialog
 import com.xinhui.mobfinalproject.data.model.Product
 import com.xinhui.mobfinalproject.databinding.FragmentBaseAddUpdateBinding
@@ -45,7 +46,7 @@ abstract class BaseAddUpdateFragment : BaseFragment<FragmentBaseAddUpdateBinding
         }
         takePictureLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val imageBitmap = result.data?.extras?.get("data") as Bitmap
+                val imageBitmap = result.data?.extras?.get(Constants.intentData) as Bitmap
                 setUriLoadGlide(BitmapConverter.bitmapToFileToUri(imageBitmap, requireContext()))
             }
         }
@@ -80,7 +81,7 @@ abstract class BaseAddUpdateFragment : BaseFragment<FragmentBaseAddUpdateBinding
             }
             btnSave.setOnClickListener {
                 selectedCategory.let {cat ->
-                    if (cat == null) showSnackbar("Please select the food category", true)
+                    if (cat == null) showSnackbar(getString(R.string.select_food_category), true)
                     else {
                         val product = Product(
                             quantity = etQuantity.text.toString().toIntOrNull() ?: 0,
@@ -120,7 +121,8 @@ abstract class BaseAddUpdateFragment : BaseFragment<FragmentBaseAddUpdateBinding
         if (takePictureIntent.resolveActivity(requireContext().packageManager) != null)
             takePictureLauncher.launch(takePictureIntent)
         else
-            Toast.makeText(requireContext(), "No camera app found", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(),
+                getString(R.string.no_camera_found), Toast.LENGTH_LONG).show()
     }
 
     protected fun setupCatAdapter() {

@@ -1,6 +1,7 @@
 package com.xinhui.mobfinalproject.ui.screens.profile.viewModel
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.xinhui.mobfinalproject.core.service.AuthService
 import com.xinhui.mobfinalproject.core.service.StorageService
@@ -12,8 +13,11 @@ import com.xinhui.mobfinalproject.ui.screens.base.viewModel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,8 +30,8 @@ class ProfileViewModelImpl @Inject constructor(
     private val notificationRepo: NotificationRepo
 ): BaseViewModel(), ProfileViewModel {
 
-    val job = SupervisorJob()
-    val scope = CoroutineScope(Dispatchers.IO + job)
+    lateinit var job: Job
+    lateinit var scope : CoroutineScope
 
     private val _user = MutableStateFlow(User(name = "anonymous", email = "anonymous"))
     override val user: StateFlow<User> = _user
@@ -35,8 +39,13 @@ class ProfileViewModelImpl @Inject constructor(
     private val _notifications = MutableStateFlow<List<Notification>>(emptyList())
     override val notifications: StateFlow<List<Notification>> = _notifications
 
-    init {
-        getCurrUser()
+    private val _loggedOut = MutableSharedFlow<Unit>()
+    override val loggedOut: SharedFlow<Unit> = _loggedOut
+
+    override fun onCreateView() {
+        super.onCreateView()
+        job = SupervisorJob()
+        scope = CoroutineScope(Dispatchers.IO + job)
         getNotification()
     }
 
@@ -90,6 +99,7 @@ class ProfileViewModelImpl @Inject constructor(
 
     override fun logout() {
         job.cancel()
+        viewModelScope.launch { _loggedOut.emit(Unit) }
         authService.logout()
     }
 
