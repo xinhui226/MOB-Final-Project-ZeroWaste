@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/landingPageFragment">
+
+    <action
+        android:id="@+id/toLogin"
+        app:destination="@+id/loginFragment"
+        app:popUpTo="@id/landingPageFragment"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/toHome"
+        app:destination="@+id/tabContainerFragment"
+        app:popUpTo="@id/loginFragment"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/toLandingPage"
+        app:destination="@+id/landingPageFragment"/>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"
+        >
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.register.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register"
+        />
+    <fragment
+        android:id="@+id/landingPageFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.LandingPageFragment"
+        android:label="landingPageFragment"
+        tools:layout="@layout/landing_page"
+        >
+        <action
+            android:id="@+id/action_landingPage_to_landingPage2"
+            app:destination="@id/landingPage2Fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/landingPage2Fragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.LandingPage2Fragment"
+        android:label="landingPage2Fragment"
+        tools:layout="@layout/landing_page2"
+        >
+        <action
+            android:id="@+id/action_landingPage2_to_landingPage3"
+            app:destination="@id/landingPage3Fragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/landingPage3Fragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.landingPages.LandingPage3Fragment"
+        android:label="landingPage3Fragment"
+        tools:layout="@layout/landing_page3"
+        />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/tabContainerFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.tabContainer.TabContainerFragment"
+        android:label="fragment_tab_container"
+        tools:layout="@layout/fragment_tab_container" >
+        <action
+            android:id="@+id/action_tabContainer_to_addFood"
+            app:destination="@id/addFoodFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
+            />
+        <action
+            android:id="@+id/action_tabContainer_to_updFood"
+            app:destination="@id/updateFoodFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
+            />
+        <action
+            android:id="@+id/action_logout"
+            app:destination="@+id/loginFragment"
+            app:popUpTo="@id/tabContainerFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/addFoodFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.addUpdateFood.addFood.AddFoodFragment"
+        android:label="fragment_add_food"
+        tools:layout="@layout/fragment_base_add_update" />
+    <fragment
+        android:id="@+id/updateFoodFragment"
+        android:name="com.xinhui.mobfinalproject.ui.screens.addUpdateFood.updateFood.UpdateFoodFragment"
+        android:label="fragment_update_food"
+        tools:layout="@layout/fragment_base_add_update" >
+        <argument android:name="productId" app:argType="string" />
+    </fragment>
+</navigation>
